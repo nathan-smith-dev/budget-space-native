@@ -3,10 +3,12 @@ package com.budgetspacefinance;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.oblador.vectoricons.VectorIconsPackage; 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.react.ReactNativeHost;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -28,7 +30,9 @@ import java.util.List;
          return Arrays.<ReactPackage>asList(
              // eg. new VectorIconsPackage()
              new RNGoogleSigninPackage(),
-             new VectorIconsPackage()
+             new VectorIconsPackage(), 
+             new RNFirebasePackage(), 
+             new RNFirebaseAuthPackage()
          );
      }
 

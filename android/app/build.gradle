@@ -94,8 +94,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.budgetspacefinance"
@@ -142,10 +142,15 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-navigation')
     compile project(':react-native-vector-icons')
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
     compile(project(":react-native-google-signin")){         
         exclude group: "com.google.android.gms" // very important
     }
-    compile 'com.google.android.gms:play-services-auth:9.2.1' // should be at least 9.0.0
+    compile 'com.google.android.gms:play-services-auth:15.0.1' // should be at least 9.0.0
+    implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.firebase:firebase-core:15.0.2"
 }
 
 // Run this once to be able to run the application with BUCK
