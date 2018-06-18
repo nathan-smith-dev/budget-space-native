@@ -7,8 +7,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 class Home extends Component {
 
     componentWillMount() {
+        GoogleSignin.hasPlayServices({ autoResolve: true }); 
+
         GoogleSignin.configure({
             iosClientId: '201170765759-f72jmcl7hcd4uo1j91k36s71d7g9u2a6.apps.googleusercontent.com', // only for iOS
+            webClientId: '201170765759-jjg6erk3u99ql5c6kgdao9vb7obiussv.apps.googleusercontent.com'
           });
     }
 

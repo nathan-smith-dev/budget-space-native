@@ -1,2 +1,1 @@
-- Add React Native Navigation to Android
-- Add React Native Vector Icons to Android
+- Add authentication for backend requests

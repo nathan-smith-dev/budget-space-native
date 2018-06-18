@@ -1,0 +1,74 @@
+{
+  "project_info": {
+    "project_number": "201170765759",
+    "firebase_url": "https://react-finance-f20df.firebaseio.com",
+    "project_id": "react-finance-f20df",
+    "storage_bucket": "react-finance-f20df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201170765759:android:60c4df5eee52f43c",
+        "android_client_info": {
+          "package_name": "com.budgetspacefinance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201170765759-9vgkgn7lhdb4i48tr22pg7pu08p6pon6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.budgetspacefinance",
+            "certificate_hash": "20d4cbb4cd89e2bff7f59dace7fba11e9c9b26b9"
+          }
+        },
+        {
+          "client_id": "201170765759-jjg6erk3u99ql5c6kgdao9vb7obiussv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "201170765759-n1tiqkgf1tfsvaeog1brpivsoc9nuf20.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "201170765759-vgdgl2o0nchv3ura5ivi69rejruch5o7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "201170765759-vgdgl2o0nchv3ura5ivi69rejruch5o7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4vPiwKlq9NWhxLX3mInTlMDgt1A-KS1A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201170765759-jjg6erk3u99ql5c6kgdao9vb7obiussv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "201170765759-f72jmcl7hcd4uo1j91k36s71d7g9u2a6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.budgetspace.ReactNative"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
