@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "201170765759-9vgkgn7lhdb4i48tr22pg7pu08p6pon6.apps.googleusercontent.com",
+          "client_id": "201170765759-cmbpi57rr54ulherd7c2vhn66p03guls.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.budgetspacefinance",
-            "certificate_hash": "20d4cbb4cd89e2bff7f59dace7fba11e9c9b26b9"
+            "certificate_hash": "1c75ef9deb8613f5ef3e09134c51dfca3a78ed26"
           }
         },
         {

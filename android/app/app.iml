@@ -22,7 +22,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://C:/tmp/budgetspacefinance/app/intermediates/classes/debug" />
     <output-test url="file://C:/tmp/budgetspacefinance/app/intermediates/classes/test/debug" />
     <exclude-output />
@@ -111,7 +111,7 @@
       <excludeFolder url="file://C:/tmp/budgetspacefinance/app/outputs" />
       <excludeFolder url="file://C:/tmp/budgetspacefinance/app/tmp" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-api-phone-15.0.1" level="project" />
@@ -134,11 +134,13 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-26.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp-urlconnection:3.6.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-auth-15.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-25.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.balysv.materialmenu:material-menu-1.5.4" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-25.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-auth-interop-15.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-15.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:fbcore-1.3.0" level="project" />
@@ -164,6 +166,7 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-stats-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-impl-15.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-core-15.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-flags-15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-1.3.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-measurement-connector-impl-15.0.0" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.0.0" level="project" />
@@ -171,6 +174,5 @@
     <orderEntry type="module" module-name="react-native-firebase" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
     <orderEntry type="module" module-name="react-native-google-signin" />
-    <orderEntry type="library" name="Gradle: android-android-27" level="project" />
   </component>
 </module>
