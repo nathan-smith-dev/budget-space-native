@@ -53,8 +53,10 @@ class Home extends Component {
         firebase.auth().signOut(); 
     }
 
-    getCurrentUser = () => {
-        console.log(firebase.auth().currentUser); 
+    getCurrentUser = async () => {
+        const currentUser = firebase.auth().currentUser; 
+        console.log(currentUser);
+        console.log(await currentUser.getIdToken()); 
     }
 
     render() {
