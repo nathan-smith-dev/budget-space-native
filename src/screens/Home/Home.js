@@ -47,6 +47,15 @@ class Home extends Component {
           console.error(e);
         }
       }
+    
+    googleLogout = () => {
+        GoogleSignin.signOut(); 
+        firebase.auth().signOut(); 
+    }
+
+    getCurrentUser = () => {
+        console.log(firebase.auth().currentUser); 
+    }
 
     render() {
         return (
@@ -54,6 +63,8 @@ class Home extends Component {
                 <Text>Home Screen</Text>
                 <Icon size={30} name="ios-trash" color="blue" />
                 <Button title="Login with Google" color="orange" onPress={this.googleLogin} />
+                <Button title="Logout" color="red" onPress={this.googleLogout} />
+                <Button title="Get Current User" color="green" onPress={this.getCurrentUser} />
             </View>
         );
     }
