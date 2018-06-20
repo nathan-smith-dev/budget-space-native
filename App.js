@@ -10,6 +10,7 @@ import SideDrawer from './src/screens/SideDrawer/SideDrawer';
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore'; 
 export const store = configureStore(); 
+import startSinglePage from './src/screens/MainTabs/startSinglePage'; 
 
 // Register Screens
 Navigation.registerComponent('budget-space-native.AuthScreen', () => AuthScreen, store, Provider);
@@ -20,9 +21,4 @@ Navigation.registerComponent('budget-space-native.RoommatesScreen', () => Roomma
 Navigation.registerComponent('budget-space-native.SideDrawer', () => SideDrawer, store, Provider);
 
 // Start App
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: 'budget-space-native.AuthScreen', 
-    title: 'Login'
-  }
-}); 
+startSinglePage(); 
