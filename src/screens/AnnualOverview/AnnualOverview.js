@@ -3,7 +3,23 @@ import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 class AnnualOverviewScreen extends Component {
+    constructor(props) {
+        super(props); 
 
+        const { navigator } = props; 
+        console.log(navigator); 
+        navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
+    }
+
+    onNavigatorEvent = event => {
+        const { navigator } = this.props; 
+        if(event.type === 'NavBarButtonPress' && event.id === 'sideDrawerToggle') {
+            navigator.toggleDrawer({
+                side: 'left'
+            }); 
+        }
+    }
+    
     render() {
         return (
             <View style={styles.backDrop}>
