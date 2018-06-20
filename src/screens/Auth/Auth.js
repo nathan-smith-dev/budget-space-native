@@ -5,7 +5,7 @@ import * as firebase from '../../firebase/firebase';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 import bsLogo from '../../assets/images/budget-space_logo.png'; 
 
-class Home extends Component {
+class AuthScreen extends Component {
 
     componentWillMount() {
         firebase.configureGoogleSignin(); 
@@ -14,7 +14,7 @@ class Home extends Component {
 
     componentWillUnmount() {
         for(let listener in this.firebaseListeners) {
-            listener(); 
+            // unregister the listeners here
         }
     }
 
@@ -68,5 +68,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Home); 
+export default connect(mapStateToProps)(AuthScreen); 
 
