@@ -4,7 +4,7 @@ import HomeScreen from './src/screens/Home/Home';
 
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore'; 
-const store = configureStore(); 
+export const store = configureStore(); 
 
 // Register Screens
 Navigation.registerComponent('budget-space-native.HomeScreen', () => HomeScreen, store, Provider);

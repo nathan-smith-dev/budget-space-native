@@ -7,3 +7,10 @@ export const setUser = (user) => {
     };
 }; 
 
+export const setAuthToken = token => {
+    return {
+        type: actionTypes.SET_TOKEN, 
+        token: token
+    };
+}; 
+

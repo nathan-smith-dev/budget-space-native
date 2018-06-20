@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     currentUser: null, 
-    authToken: null
+    token: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +11,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 currentUser: action.user
+            }; 
+        case actionTypes.SET_TOKEN: 
+            return {
+                ...state, 
+                token: action.token
             }; 
         default: 
             return state; 
