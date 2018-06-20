@@ -12,6 +12,8 @@
 
 #import "RCCManager.h"
 
+#import <Firebase.h>
+
 #import <React/RCTRootView.h>
 
 #import <RNGoogleSignin/RNGoogleSignin.h>
@@ -21,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   NSURL *jsCodeLocation;
 #ifdef DEBUG
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
