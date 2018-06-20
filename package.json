@@ -23,6 +23,9 @@
     "react-native-firebase": "^4.2.0",
     "react-native-google-signin": "^0.12.0",
     "react-native-navigation": "^1.1.471",
-    "react-native-vector-icons": "^4.6.0"
+    "react-native-vector-icons": "^4.6.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }
