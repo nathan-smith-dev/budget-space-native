@@ -5,7 +5,7 @@ import * as colors from '../../assets/styles/colors';
 const startMainTabs = () => {
     // Check if android here 
     Promise.all([
-        Icon.getImageSource('ios-list', 40), 
+        Icon.getImageSource('ios-list-box', 40), 
         Icon.getImageSource('ios-pie', 40),
         Icon.getImageSource('ios-calendar', 40),
         Icon.getImageSource('ios-people', 40)
