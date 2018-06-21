@@ -23,9 +23,10 @@ class TransactionsScreen extends Component {
     }
     
     render() {
+        const today = new Date(); 
         return (
             <Backdrop>
-                <TransactionTable />
+                <TransactionTable transactions={[{id: '1', amount: 2, type: 'expense', categoryName: 'test', date: `${today.getMonth()+1}-${today.getDate()}`}]} />
             </Backdrop>
         );
     }

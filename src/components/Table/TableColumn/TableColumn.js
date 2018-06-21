@@ -11,7 +11,7 @@ const tableCol = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 5,
+        padding: 5
     }
 }); 
 
