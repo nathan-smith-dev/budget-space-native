@@ -6,6 +6,11 @@ const instance = axios.create({
     timeout: 1000
 });
 
-export const getTransactions = token => {
-    return instance.get('/transactions', { headers: { 'x-auth-token': token } }); 
+export const getTransactions = (token, month = null, year = null) => {
+    let url = '/transactions'; 
+    if(month && year) {
+        url += `?month=${month}&year=${year}`
+    }
+    console.log(url)
+    return instance.get(url, { headers: { 'x-auth-token': token } }); 
 }; 

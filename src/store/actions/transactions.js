@@ -3,9 +3,10 @@ import * as apiCalls from '../../apiCalls';
 
 export const getTransactions = token => {
     console.log('Trans action')
-    return async dispatch => {
+    return async (dispatch, getState) => {
         try {
-            const transactions = await apiCalls.getTransactions(token); 
+            const focusedDates = getState().transactions.trackedDates;
+            const transactions = await apiCalls.getTransactions(token, focusedDates.month, focusedDates.year); 
             dispatch(setTransactions(transactions.data)); 
         }
         catch(err) {
