@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet } from 'react-native';
+import Backdrop from '../../hoc/Backdrop/Backdrop' ; 
+import TransactionTable from '../../components/TransactionTable/TransactionTable'; 
 import { connect } from 'react-redux';
 
 class TransactionsScreen extends Component {
@@ -22,35 +24,15 @@ class TransactionsScreen extends Component {
     
     render() {
         return (
-            <View style={styles.backDrop}>
-                <View style={styles.container}>
-                    <View>
-                        <Text style={styles.title}>Transactions Screen</Text>
-                    </View>
-                </View>
-            </View>
-            );
+            <Backdrop>
+                <TransactionTable />
+            </Backdrop>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    backDrop: {
-        flex: 1, 
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: '#cae2ee'
-    }, 
-    container: {
-        backgroundColor: '#ffff', 
-        borderRadius: 5,
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'space-around'
-    }, 
-    title: {
-        color: 'white', 
-        fontSize: 26
-    }
+    
 })
 
 const mapStateToProps = state => {
