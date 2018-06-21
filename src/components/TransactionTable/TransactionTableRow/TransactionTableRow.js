@@ -9,17 +9,19 @@ import Touchable from '../../../hoc/Touchable/Touchable';
 const transTableRow = ({ date, amount, type, categoryName, onPress }) => {
     return (
         <Touchable onPress={onPress}>
-            <TableRow>
-                <TableColumn grow={2}>
-                    <Text>{date}</Text>
-                </TableColumn>
-                <TableColumn grow={3}>
-                    <Text style={styles.amountText}>{amount}</Text>
-                </TableColumn>
-                <TableColumn grow={7}>
-                    <Text style={{marginLeft: 15}}>{categoryName}</Text>
-                </TableColumn>
-            </TableRow>
+            <View>
+                <TableRow>
+                    <TableColumn grow={2}>
+                        <Text>{date}</Text>
+                    </TableColumn>
+                    <TableColumn grow={3}>
+                        <Text style={styles.amountText}>{amount}</Text>
+                    </TableColumn>
+                    <TableColumn grow={7}>
+                        <Text style={{marginLeft: 15}}>{categoryName}</Text>
+                    </TableColumn>
+                </TableRow>
+            </View>
         </Touchable>
     ); 
 }

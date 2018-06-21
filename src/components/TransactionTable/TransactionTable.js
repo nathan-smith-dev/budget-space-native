@@ -33,13 +33,6 @@ const transTable = ({ transactions }) => {
 const styles = StyleSheet.create({
     container: {
         margin: 15
-    }, 
-    headingText: {
-        color: colors.DARK_COLOR
-    }, 
-    amountText: {
-        textAlign: 'right', 
-        color: 'red'
     }
 }); 
 
