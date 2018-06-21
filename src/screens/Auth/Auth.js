@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet } from 'react-native'; 
 import { connect } from 'react-redux';
 import * as firebase from '../../firebase/firebase'; 
-import Icon from 'react-native-vector-icons/Ionicons'; 
 import bsLogo from '../../assets/images/budget-space_logo.png'; 
+import ButtonOutline from '../../components/ButtonOutline/ButtonOutline'; 
 
 class AuthScreen extends Component {
 
@@ -21,27 +21,20 @@ class AuthScreen extends Component {
     handleGoogleSignIn = () => {
         firebase.googleLogin(); 
     }
-    
-    handleGoogleSignOut = () => {
-        firebase.googleLogout(); 
-    }
-
-    handleGetUser = async () => {
-        const { currentUser } = this.props; 
-        console.log(currentUser); 
-    }
 
     render() {
         return (
             <View style={styles.container}>
-                <View>
+                <View style={styles.secondaryContainer}>
                     <Image source={bsLogo} height={50} />
                     <Text style={styles.title}>Budget Space</Text>
                 </View>
                 <View>
-                    <Button title="Login with Google" color="orange" onPress={this.handleGoogleSignIn} />
-                    <Button title="Logout" color="red" onPress={this.handleGoogleSignOut} />
-                    <Button title="Get Current User" color="green" onPress={this.handleGetUser} />
+                    <ButtonOutline 
+                        text="Login" 
+                        color="#ef403b" 
+                        iconRight="logo-google"
+                        onPress={this.handleGoogleSignIn} />
                 </View>
             </View>
         );
@@ -55,6 +48,9 @@ const styles = StyleSheet.create({
         flex: 1, 
         alignItems: 'center', 
         justifyContent: 'space-around'
+    }, 
+    secondaryContainer: {
+        alignItems: 'center'
     }, 
     title: {
         color: 'white', 
