@@ -17,9 +17,11 @@ class SideDrawer extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Touchable onPress={this.handleLogOut}>
-                    <Media iconRight="ios-log-out" text="Log Out" color={colors.PRIMARY_COLOR} />
-                </Touchable>
+                <View style={styles.subContainer}>
+                    <Touchable onPress={this.handleLogOut}>
+                        <Media iconRight="ios-log-out" text="Log Out" color={colors.PRIMARY_COLOR} />
+                    </Touchable>
+                </View>
             </View>
         );
     }
@@ -31,7 +33,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         flex: 1, 
         paddingTop: 40,
-        paddingLeft: 15
+        paddingLeft: 15, 
+    }, 
+    subContainer: {
+        minWidth: '80%'
     }, 
     title: {
         color: 'black', 
