@@ -1,1 +1,5 @@
-- Add authentication for backend requests
+- Add + for new transaction
+- Add edit and delete for transaction detail 
+- Add filter to transactions 
+- Add focused month and year selector 
+- Fixed heading text color and text color 
