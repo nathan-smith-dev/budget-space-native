@@ -9,7 +9,7 @@ class TransactionsScreen extends Component {
         super(props); 
 
         const { navigator } = props; 
-        console.log(navigator); 
+        // console.log(navigator); 
         navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
     }
 
@@ -23,10 +23,10 @@ class TransactionsScreen extends Component {
     }
     
     render() {
-        const today = new Date(); 
+        const { transactions } = this.props; 
         return (
             <Backdrop>
-                <TransactionTable transactions={[{id: '1', amount: 2, type: 'expense', categoryName: 'test', date: `${today.getMonth()+1}-${today.getDate()}`}]} />
+                <TransactionTable transactions={transactions} />
             </Backdrop>
         );
     }
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         currentUser: state.auth.currentUser,
+        transactions: state.transactions.transactions,
     }
 }
 

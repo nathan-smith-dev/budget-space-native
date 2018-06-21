@@ -16,10 +16,10 @@ const transTable = ({ transactions }) => {
                     data={transactions}
                     renderItem={info => (
                         <TransactionTableRow 
-                            date={info.item.date}
+                            date={new Date(info.item.date).toDateString()}
                             amount={info.item.amount}
                             type={info.item.type}
-                            categoryName={info.item.categoryName}
+                            categoryName={info.item.category}
                             onPress={() => alert('Pressed id: ' + info.item.id)} 
                         />
                     )}

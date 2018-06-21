@@ -7,7 +7,7 @@ class AnnualOverviewScreen extends Component {
         super(props); 
 
         const { navigator } = props; 
-        console.log(navigator); 
+        // console.log(navigator); 
         navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
     }
 

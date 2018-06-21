@@ -3,6 +3,7 @@ import { GoogleSignin } from 'react-native-google-signin';
 import { store } from '../../App';
 
 import * as authActions from '../store/actions/auth'; 
+import * as transactionActions from '../store/actions/transactions'; 
 
 export const configureGoogleSignin = () => {
     GoogleSignin.hasPlayServices({ autoResolve: true }); 
@@ -13,10 +14,10 @@ export const configureGoogleSignin = () => {
     });
 }
 
-export const registerAuthListeners = () => {
+export const registerAuthListeners = () => { 
     const listeners = []; 
 
-    listeners.push(
+    listeners.push( // All redux gets here
         firebase.auth().onUserChanged(() => {
             const currentUser = firebase.auth().currentUser; 
             store.dispatch(authActions.setUser(currentUser)); 
@@ -29,6 +30,9 @@ export const registerAuthListeners = () => {
             if(currentUser) {
                 const token = await currentUser.getIdToken(); 
                 store.dispatch(authActions.setAuthToken(token)); 
+                if(token) {
+                    store.dispatch(transactionActions.getTransactions(token)); 
+                }
             }
             else {
                 store.dispatch(authActions.setAuthToken(null)); 
@@ -45,7 +49,7 @@ export const googleLogin = async () => {
 
         // create a new firebase credential with the token
         const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken)
-        console.log(data); 
+        // console.log(data); 
         // login with credential
         const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
     } catch (e) {
