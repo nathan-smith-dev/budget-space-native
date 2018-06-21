@@ -6,7 +6,7 @@ import { Table, TableColumn, TableRow } from '../Table';
 import TransactionTableHeader from './TransactionTableHeader/TransactionTableHeader'; 
 import TransactionTableRow from './TransactionTableRow/TransactionTableRow'; 
 
-const transTable = ({ transactions }) => {
+const transTable = ({ transactions, onRowPressed }) => {
     return (
         <View style={styles.container}>
             <Table>
@@ -20,7 +20,7 @@ const transTable = ({ transactions }) => {
                             amount={info.item.amount}
                             type={info.item.type}
                             categoryName={info.item.category}
-                            onPress={() => alert('Pressed id: ' + info.item.id)} 
+                            onPress={() => onRowPressed(info.item.id)} 
                         />
                     )}
                 />
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
 }); 
 
 transTable.propTypes = {
-    transactions: PropTypes.array.isRequired
+    transactions: PropTypes.array.isRequired, 
+    onRowPressed: PropTypes.func.isRequired,
 }
 
 export default transTable; 

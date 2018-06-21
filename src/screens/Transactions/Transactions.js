@@ -21,12 +21,26 @@ class TransactionsScreen extends Component {
             }); 
         }
     }
+
+    handleTransactionPressed = id => {
+        const { navigator, transactions } = this.props; 
+        const transaction = transactions.find(trans => trans.id === id); 
+        navigator.push({
+            screen: 'budget-space-native.TransactionDetail', 
+            title: 'Transaction Detail', 
+            passProps: {...transaction}, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+    }
     
     render() {
         const { transactions } = this.props; 
         return (
             <Backdrop>
-                <TransactionTable transactions={transactions} />
+                <TransactionTable 
+                    transactions={transactions}
+                    onRowPressed={this.handleTransactionPressed} />
             </Backdrop>
         );
     }
