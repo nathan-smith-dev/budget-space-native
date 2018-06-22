@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';  
-import { View, Picker, StyleSheet } from 'react-native'; 
+import { View, Picker, StyleSheet, Platform } from 'react-native'; 
 
 const picker = ({ data, onValueChange, selectedValue, color, style }) => {
     const items = data.map((item, index) => (
@@ -11,7 +11,8 @@ const picker = ({ data, onValueChange, selectedValue, color, style }) => {
     )); 
 
     return (
-        <View style={[styles.container, {borderColor: color}, {...style}]}>
+        <View 
+            style={[styles.container, {borderColor: Platform.OS === 'ios' ? 'transparent' :  color}, {...style}]}>
             <Picker 
                 selectedValue={selectedValue}
                 onValueChange={onValueChange}
