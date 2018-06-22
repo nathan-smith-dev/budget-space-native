@@ -25,6 +25,17 @@ class TransactionsScreen extends Component {
         }
     }
 
+    handleFilterPressed = () => {
+        const { navigator } = this.props; 
+        navigator.push({
+            screen: 'budget-space-native.FilterScreen', 
+            title: 'Filter Settings', 
+            passProps: {}, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+    }
+
     handleTransactionPressed = id => {
         const { navigator, transactions } = this.props; 
         const transaction = transactions.find(trans => trans.id === id); 
@@ -43,7 +54,8 @@ class TransactionsScreen extends Component {
             <Backdrop>
                 <TransactionTable 
                     transactions={transactions}
-                    onRowPressed={this.handleTransactionPressed} />
+                    onRowPressed={this.handleTransactionPressed} 
+                    onFilterPressed={this.handleFilterPressed} />
             </Backdrop>
         );
     }

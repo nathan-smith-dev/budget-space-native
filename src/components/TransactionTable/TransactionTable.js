@@ -6,11 +6,11 @@ import { Table, TableColumn, TableRow } from '../Table';
 import TransactionTableHeader from './TransactionTableHeader/TransactionTableHeader'; 
 import TransactionTableRow from './TransactionTableRow/TransactionTableRow'; 
 
-const transTable = ({ transactions, onRowPressed }) => {
+const transTable = ({ transactions, onRowPressed, onFilterPressed }) => {
     return (
         <View style={styles.container}>
             <Table>
-                <TransactionTableHeader />
+                <TransactionTableHeader onFilterPressed={onFilterPressed} />
                 <FlatList 
                     keyExtractor={item => item.id}
                     data={transactions}
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 transTable.propTypes = {
     transactions: PropTypes.array.isRequired, 
     onRowPressed: PropTypes.func.isRequired,
+    onFilterPressed: PropTypes.func.isRequired,
 }
 
 export default transTable; 

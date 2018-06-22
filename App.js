@@ -7,6 +7,7 @@ import AnnualOverviewScreen from './src/screens/AnnualOverview/AnnualOverview';
 import RoommatesScreen from './src/screens/Roommates/Roommates'; 
 import SideDrawer from './src/screens/SideDrawer/SideDrawer'; 
 import TransactionDetailScreen from './src/screens/TransactionDetail/TransactionDetail'; 
+import FilterScreen from './src/screens/Filter/Filter'; 
 
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore'; 
@@ -21,6 +22,7 @@ Navigation.registerComponent('budget-space-native.AnnualOverviewScreen', () => A
 Navigation.registerComponent('budget-space-native.RoommatesScreen', () => RoommatesScreen, store, Provider);
 Navigation.registerComponent('budget-space-native.SideDrawer', () => SideDrawer, store, Provider);
 Navigation.registerComponent('budget-space-native.TransactionDetail', () => TransactionDetailScreen);
+Navigation.registerComponent('budget-space-native.FilterScreen', () => FilterScreen, store, Provider);
 
 // Start App
 startSinglePage(); 

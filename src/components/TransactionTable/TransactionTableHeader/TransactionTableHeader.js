@@ -1,10 +1,11 @@
 import React from 'react'; 
+import PropTypes from 'prop-types'; 
 import { View, Text, StyleSheet } from 'react-native'; 
 import * as colors from '../../../assets/styles/colors'; 
 import { TableColumn, TableRow } from '../../Table'; 
 import ButtonIcon from '../../ButtonIcon/ButtonIcon'; 
 
-const transTableHeader = (props) => {
+const transTableHeader = ({ onFilterPressed }) => {
     return (
         <TableRow>
             <TableColumn grow={2}>
@@ -20,7 +21,7 @@ const transTableHeader = (props) => {
                         icon="ios-funnel" 
                         color={colors.PRIMARY_COLOR} 
                         size={20}
-                        onPress={() => alert('Handle filter')} />
+                        onPress={onFilterPressed} />
                 </View>
             </TableColumn>
         </TableRow>
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between', 
         flexDirection: 'row'
     }
-}); 
+});
+
+transTableHeader.propTypes = {
+    onFilterPressed: PropTypes.func.isRequired
+}; 
 
 export default transTableHeader; 
