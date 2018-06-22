@@ -20,6 +20,9 @@ class TransactionsScreen extends Component {
                 side: 'left'
             }); 
         }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'addExpenseToggle') {
+            alert('Add Transaction'); 
+        }
     }
 
     handleTransactionPressed = id => {

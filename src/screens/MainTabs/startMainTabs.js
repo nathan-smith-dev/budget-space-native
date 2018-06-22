@@ -10,6 +10,7 @@ const startMainTabs = () => {
         Icon.getImageSource('ios-calendar', 40),
         Icon.getImageSource('ios-people', 40),
         Icon.getImageSource('md-menu', 40),
+        Icon.getImageSource('ios-add-circle', 40),
     ])
     .then(sources => {
         Navigation.startTabBasedApp({
@@ -25,6 +26,14 @@ const startMainTabs = () => {
                                 icon: sources[4], 
                                 title: 'menu', 
                                 id:'sideDrawerToggle'
+                            }
+                        ], 
+                        rightButtons: [
+                            {
+                                icon: sources[5], 
+                                title: 'add expense', 
+                                id: 'addExpenseToggle', 
+                                buttonFontWeight: '800'
                             }
                         ]
                     }
