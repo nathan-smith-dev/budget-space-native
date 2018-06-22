@@ -10,7 +10,7 @@ const startMainTabs = () => {
         Icon.getImageSource('ios-calendar', 40),
         Icon.getImageSource('ios-people', 40),
         Icon.getImageSource('md-menu', 40),
-        Icon.getImageSource('ios-add-circle', 40),
+        Icon.getImageSource('md-add', 40),
     ])
     .then(sources => {
         Navigation.startTabBasedApp({
