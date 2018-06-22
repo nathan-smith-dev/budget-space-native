@@ -1,4 +1,2 @@
 - Add + for new transaction
 - Add edit and delete for transaction detail 
-- Add filter to transactions 
-- Fixed heading text color and text color 
