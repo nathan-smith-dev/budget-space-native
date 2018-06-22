@@ -21,7 +21,7 @@ class TransactionsScreen extends Component {
             }); 
         }
         else if(event.type === 'NavBarButtonPress' && event.id === 'addExpenseToggle') {
-            alert('Add Transaction'); 
+            this.handleCreateTransaction(); 
         }
     }
 
@@ -43,6 +43,16 @@ class TransactionsScreen extends Component {
             screen: 'budget-space-native.TransactionDetail', 
             title: 'Transaction Detail', 
             passProps: {...transaction}, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+    }
+
+    handleCreateTransaction = () => {
+        const { navigator } = this.props; 
+        navigator.push({
+            screen: 'budget-space-native.TransactionFormScreen', 
+            title: 'New Transaction', 
             animated: true, 
             animationType: 'fade'
         }); 
@@ -78,7 +88,7 @@ class TransactionsScreen extends Component {
 
 const styles = StyleSheet.create({
     
-})
+}); 
 
 const mapStateToProps = state => {
     return {
