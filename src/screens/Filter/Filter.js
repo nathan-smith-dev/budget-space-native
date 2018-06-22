@@ -4,6 +4,7 @@ import Picker from '../../components/Picker/Picker';
 import { connect } from 'react-redux';
 import * as transactionActions from '../../store/actions/transactions'; 
 import * as colors from '../../assets/styles/colors';
+import Backdrop from '../../hoc/Backdrop/Backdrop'; 
 
 class FilterScreen extends Component {
 
@@ -42,38 +43,43 @@ class FilterScreen extends Component {
         ]; 
 
         return (
-            <View>
-                <Text>Select Filter</Text>
-                <View>
-                    <View style={styles.focusedDatesContainer}>
-                        <View style={{width: '45%'}}>
-                            <Text>Month</Text>
-                            <Picker 
-                                style={{width: '100%'}}
-                                selectedValue={focusedDates && focusedDates.month}
-                                onValueChange={this.handleMonthChange}
-                                data={months}
-                                color={colors.PRIMARY_COLOR}
-                            />
-                        </View>
-                        <View style={{width: '45%'}}>
-                            <Text>Year</Text>
-                            <Picker 
-                                style={{width: '100%'}}
-                                selectedValue={focusedDates && focusedDates.year}
-                                onValueChange={this.handleYearChange}
-                                data={years}
-                                color={colors.PRIMARY_COLOR}
-                            />
+            <Backdrop>
+                <View style={styles.container}>
+                    <Text>Select Filter</Text>
+                    <View>
+                        <View style={styles.focusedDatesContainer}>
+                            <View style={{width: '45%'}}>
+                                <Text>Month</Text>
+                                <Picker 
+                                    style={{width: '100%'}}
+                                    selectedValue={focusedDates && focusedDates.month}
+                                    onValueChange={this.handleMonthChange}
+                                    data={months}
+                                    color={colors.PRIMARY_COLOR}
+                                />
+                            </View>
+                            <View style={{width: '45%'}}>
+                                <Text>Year</Text>
+                                <Picker 
+                                    style={{width: '100%'}}
+                                    selectedValue={focusedDates && focusedDates.year}
+                                    onValueChange={this.handleYearChange}
+                                    data={years}
+                                    color={colors.PRIMARY_COLOR}
+                                />
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
+            </Backdrop>
         ); 
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        margin: 15
+    }, 
     focusedDatesContainer: {
         flexDirection: 'row', 
         justifyContent: 'space-around'
