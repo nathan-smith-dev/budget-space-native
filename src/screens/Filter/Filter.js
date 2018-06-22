@@ -1,7 +1,9 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet, Picker } from 'react-native'; 
+import { View, Text, StyleSheet } from 'react-native'; 
+import Picker from '../../components/Picker/Picker'; 
 import { connect } from 'react-redux';
 import * as transactionActions from '../../store/actions/transactions'; 
+import * as colors from '../../assets/styles/colors';
 
 class FilterScreen extends Component {
 
@@ -20,46 +22,63 @@ class FilterScreen extends Component {
     render() {
         const { focusedDates } = this.props; 
         const today = new Date(); 
+        const months = [
+            {label: 'January', value: 1},
+            {label: 'February', value: 2},
+            {label: 'March', value: 3},
+            {label: 'April', value: 4},
+            {label: 'May', value: 5},
+            {label: 'June', value: 6},
+            {label: 'July', value: 7},
+            {label: 'August', value: 8},
+            {label: 'September', value: 9},
+            {label: 'October', value: 10},
+            {label: 'November', value: 11},
+            {label: 'December', value: 12},
+        ]; 
+        const years = [
+            {label: today.getFullYear() + '', value: today.getFullYear()},
+            {label: (today.getFullYear() - 1) + '', value: today.getFullYear() - 1},
+        ]; 
 
         return (
             <View>
                 <Text>Select Filter</Text>
                 <View>
-                    <View>
-                        <Text>Month</Text>
-                        <Picker 
-                            selectedValue={focusedDates && focusedDates.month}
-                            onValueChange={this.handleMonthChange}
-                        >
-                            <Picker.Item label="January" value={1} />
-                            <Picker.Item label="February" value={2} />
-                            <Picker.Item label="March" value={3} />
-                            <Picker.Item label="April" value={4} />
-                            <Picker.Item label="May" value={5} />
-                            <Picker.Item label="June" value={6} />
-                            <Picker.Item label="July" value={7} />
-                            <Picker.Item label="August" value={8} />
-                            <Picker.Item label="September" value={9} />
-                            <Picker.Item label="October" value={10} />
-                            <Picker.Item label="November" value={11} />
-                            <Picker.Item label="December" value={12} />
-                        </Picker>
-                    </View>
-                    <View>
-                        <Text>Year</Text>
-                        <Picker 
-                            selectedValue={focusedDates && focusedDates.year}
-                            onValueChange={this.handleYearChange}
-                        >
-                            <Picker.Item label={today.getFullYear() + ''} value={today.getFullYear()} />
-                            <Picker.Item label={(today.getFullYear() - 1) + ''} value={today.getFullYear() - 1} />
-                        </Picker>
+                    <View style={styles.focusedDatesContainer}>
+                        <View style={{width: '45%'}}>
+                            <Text>Month</Text>
+                            <Picker 
+                                style={{width: '100%'}}
+                                selectedValue={focusedDates && focusedDates.month}
+                                onValueChange={this.handleMonthChange}
+                                data={months}
+                                color={colors.PRIMARY_COLOR}
+                            />
+                        </View>
+                        <View style={{width: '45%'}}>
+                            <Text>Year</Text>
+                            <Picker 
+                                style={{width: '100%'}}
+                                selectedValue={focusedDates && focusedDates.year}
+                                onValueChange={this.handleYearChange}
+                                data={years}
+                                color={colors.PRIMARY_COLOR}
+                            />
+                        </View>
                     </View>
                 </View>
             </View>
         ); 
     }
 }
+
+const styles = StyleSheet.create({
+    focusedDatesContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'space-around'
+    }
+});
 
 const mapStateToProps = state => {
     return {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';  
 import { View, Picker, StyleSheet } from 'react-native'; 
 
-const picker = ({ data, onValueChange, selectedValue, color }) => {
+const picker = ({ data, onValueChange, selectedValue, color, style }) => {
     const items = data.map((item, index) => (
         <Picker.Item 
             key={index}
@@ -11,7 +11,7 @@ const picker = ({ data, onValueChange, selectedValue, color }) => {
     )); 
 
     return (
-        <View style={[styles.container, {borderColor: color}]}>
+        <View style={[styles.container, {borderColor: color}, {...style}]}>
             <Picker 
                 selectedValue={selectedValue}
                 onValueChange={onValueChange}
@@ -25,7 +25,8 @@ const picker = ({ data, onValueChange, selectedValue, color }) => {
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1, 
-        borderRadius: 5
+        borderRadius: 5, 
+        width: '100%'
     }
 })
 
@@ -33,6 +34,7 @@ picker.propTypes = {
     data: PropTypes.arrayOf(Object).isRequired, 
     color: PropTypes.string, 
     onValueChange: PropTypes.func.isRequired,
+    style: PropTypes.object,
     selectedValue: PropTypes.any.isRequired
 };
 
