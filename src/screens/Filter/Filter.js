@@ -6,13 +6,15 @@ import * as transactionActions from '../../store/actions/transactions';
 class FilterScreen extends Component {
 
     handleMonthChange = (month, index) => {
-        const { setTrackedDates, focusedDates } = this.props; 
+        const { setTrackedDates, focusedDates, token, getTransactions } = this.props; 
         setTrackedDates({month: month, year: focusedDates.year}); 
+        getTransactions(token); 
     }
     
     handleYearChange = (year, index) => {
-        const { setTrackedDates, focusedDates } = this.props; 
+        const { setTrackedDates, focusedDates, token, getTransactions } = this.props; 
         setTrackedDates({month: focusedDates.month, year: year}); 
+        getTransactions(token);
     }
 
     render() {
@@ -61,13 +63,15 @@ class FilterScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        focusedDates: state.transactions.trackedDates
+        focusedDates: state.transactions.trackedDates, 
+        token: state.auth.token
     }; 
 }; 
 
 const mapDispatchToProps = dispatch => {
     return {
         setTrackedDates: (dateObj) => dispatch(transactionActions.setTrackedDates(dateObj)),
+        getTransactions: token => dispatch(transactionActions.getTransactions(token))
     }
 }
 
