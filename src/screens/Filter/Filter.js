@@ -1,15 +1,18 @@
 import React, { Component } from 'react'; 
 import { View, Text, StyleSheet, Picker } from 'react-native'; 
 import { connect } from 'react-redux';
+import * as transactionActions from '../../store/actions/transactions'; 
 
 class FilterScreen extends Component {
 
     handleMonthChange = (month, index) => {
-        alert('Month selected: ' + month); 
+        const { setTrackedDates, focusedDates } = this.props; 
+        setTrackedDates({month: month, year: focusedDates.year}); 
     }
     
     handleYearChange = (year, index) => {
-        alert('Year selected: ' + year); 
+        const { setTrackedDates, focusedDates } = this.props; 
+        setTrackedDates({month: focusedDates.month, year: year}); 
     }
 
     render() {
@@ -59,7 +62,13 @@ class FilterScreen extends Component {
 const mapStateToProps = state => {
     return {
         focusedDates: state.transactions.trackedDates
+    }; 
+}; 
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setTrackedDates: (dateObj) => dispatch(transactionActions.setTrackedDates(dateObj)),
     }
 }
 
-export default connect(mapStateToProps)(FilterScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(FilterScreen); 

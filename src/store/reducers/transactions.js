@@ -20,6 +20,11 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 transactions: action.transactions
             }; 
+        case actionTypes.SET_TRACKED_DATES: 
+            return {
+                ...state, 
+                trackedDates: action.trackedDates
+            }; 
         case actionTypes.SET_DATE_FILTERS: 
             return {
                 ...state, 

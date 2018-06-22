@@ -52,3 +52,10 @@ export const setFilterDates = dates => {
         dates: dates
     }; 
 }; 
+
+export const setTrackedDates = dateObj => {
+    return {
+        type: actionTypes.SET_TRACKED_DATES, 
+        trackedDates: dateObj
+    }; 
+}; 
