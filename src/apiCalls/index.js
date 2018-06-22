@@ -11,6 +11,15 @@ export const getTransactions = (token, month = null, year = null) => {
     if(month && year) {
         url += `?month=${month}&year=${year}`
     }
-    console.log(url)
+    // console.log(url)
+    return instance.get(url, { headers: { 'x-auth-token': token } }); 
+}; 
+
+export const getFilterDates = (token, month = null, year = null) => {
+    let url = '/transactions/dates'; 
+    if(month && year) {
+        url += `?month=${month}&year=${year}`
+    }
+    // console.log(url)
     return instance.get(url, { headers: { 'x-auth-token': token } }); 
 }; 

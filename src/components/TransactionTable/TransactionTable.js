@@ -16,7 +16,7 @@ const transTable = ({ transactions, onRowPressed, onFilterPressed }) => {
                     data={transactions}
                     renderItem={info => (
                         <TransactionTableRow 
-                            date={new Date(info.item.date).toDateString()}
+                            date={info.item.date}
                             amount={info.item.amount}
                             type={info.item.type}
                             categoryName={info.item.category}

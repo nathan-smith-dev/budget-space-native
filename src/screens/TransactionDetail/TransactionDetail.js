@@ -9,7 +9,7 @@ class TransactionDetailScreen extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired, 
         amount: PropTypes.number.isRequired, 
-        date: PropTypes.string.isRequired, 
+        date: PropTypes.instanceOf(Date).isRequired, 
         type: PropTypes.string.isRequired, 
         category: PropTypes.string.isRequired
     }
@@ -21,7 +21,7 @@ class TransactionDetailScreen extends Component {
                 <View style={styles.container}>
                     <View style={styles.detailContainer}>
                         <Text style={styles.headingText}>Date</Text>
-                        <Text style={styles.detailText}>{new Date(date).toLocaleDateString('en-us')}</Text>
+                        <Text style={styles.detailText}>{date.toLocaleDateString('en-us')}</Text>
                         <Text style={styles.headingText}>Amount</Text>
                         <Text style={styles.detailText}>{`$${amount.toFixed(2)}`}</Text>
                         <Text style={styles.headingText}>Category</Text>

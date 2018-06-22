@@ -13,7 +13,7 @@ const transTableRow = ({ date, amount, type, categoryName, onPress }) => {
             <View>
                 <TableRow>
                     <TableColumn grow={2}>
-                        <Text>{formatDate(new Date(date))}</Text>
+                        <Text>{formatDate(date)}</Text>
                     </TableColumn>
                     <TableColumn grow={3}>
                         <Text style={[styles.amountText, {color: type === 'Expense' ? colors.DANGER_COLOR : colors.SUCCESS_COLOR}]}>{amount.toFixed(2)}</Text>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
 transTableRow.propTypes = {
     onPress: PropTypes.func.isRequired, 
-    date: PropTypes.string.isRequired, 
+    date: PropTypes.instanceOf(Date).isRequired, 
     amount: PropTypes.number.isRequired, 
     type: PropTypes.string.isRequired, 
     categoryName: PropTypes.string.isRequired
