@@ -34,14 +34,16 @@ class TransactionDetailScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 15
+        margin: 15, 
+        flex: 1, 
+        alignItems: 'center'
     }, 
     headingText: {
         color: colors.DARK_COLOR, 
-        fontSize: 18, 
+        fontSize: 14, 
     }, 
     detailText: {
-        fontSize: 16, 
+        fontSize: 18, 
         marginBottom: 10
     }
 }); 
