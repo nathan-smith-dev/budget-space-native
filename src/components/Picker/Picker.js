@@ -7,7 +7,8 @@ const picker = ({ data, onValueChange, selectedValue, color, style }) => {
         <Picker.Item 
             key={index}
             label={item.label} 
-            value={item.value} color={color} />
+            value={item.value} 
+            color={color} />
     )); 
 
     return (

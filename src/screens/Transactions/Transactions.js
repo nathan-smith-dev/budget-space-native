@@ -49,11 +49,26 @@ class TransactionsScreen extends Component {
     }
     
     render() {
-        const { transactions } = this.props; 
+        const { transactions, activeFilters } = this.props;
+
+        // Apply Filters
+        let filteredTransactions = transactions; 
+        if(activeFilters.primaryFilter !== 'none' && activeFilters.secondaryFilter !== 'none') {
+            if(activeFilters.primaryFilter === 'category') {
+                filteredTransactions = transactions.filter(
+                    trans => trans[activeFilters.primaryFilter] === activeFilters.secondaryFilter
+                );  
+            }
+            else if(activeFilters.primaryFilter === 'date') {
+                filteredTransactions = transactions.filter( // this is ugly but apparently dates wont compare so compare their strings
+                    trans => new Date(trans[activeFilters.primaryFilter]).toDateString() === new Date(activeFilters.secondaryFilter).toDateString()
+                ); 
+            }
+        }
         return (
             <Backdrop>
                 <TransactionTable 
-                    transactions={transactions}
+                    transactions={filteredTransactions}
                     onRowPressed={this.handleTransactionPressed} 
                     onFilterPressed={this.handleFilterPressed} />
             </Backdrop>
@@ -69,6 +84,7 @@ const mapStateToProps = state => {
     return {
         currentUser: state.auth.currentUser,
         transactions: state.transactions.transactions,
+        activeFilters: state.transactions.filters.activeFilters
     }
 }
 

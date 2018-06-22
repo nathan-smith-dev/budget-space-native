@@ -5,7 +5,11 @@ const initialState = {
     transactions: [], 
     filters: {
         dates: [], 
-        categories: []
+        categories: [], 
+        activeFilters: {
+            primaryFilter: 'none', 
+            secondaryFilter: 'none'
+        }
     }, 
     trackedDates: {
         month: today.getMonth() + 1, 
@@ -39,6 +43,14 @@ const reducer = (state = initialState, action) => {
                 filters: {
                     ...state.filters, 
                     categories: action.categories
+                }
+            }; 
+        case actionTypes.SET_ACTIVE_FILTERS: 
+            return {
+                ...state, 
+                filters: {
+                    ...state.filters, 
+                    activeFilters: action.activeFilters
                 }
             }; 
         default: 
