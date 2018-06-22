@@ -31,6 +31,7 @@ class AuthScreen extends Component {
                 </View>
                 <View>
                     <ButtonOutline 
+                        size={20}
                         text="Login" 
                         color="#ef403b" 
                         iconRight="logo-google"
