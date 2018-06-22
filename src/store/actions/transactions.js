@@ -32,12 +32,27 @@ export const getFilterDates = token => {
             dispatch(setFilterDates(justDates)); 
         }
         catch(err) {
-            alert('Error getting transactions'); 
+            alert('Error getting date filter'); 
             console.log(err); 
         }
     }; 
 }; 
 
+export const getFilterCategories = token => {
+    console.log('Trans action')
+    return async (dispatch, getState) => {
+        try {
+            const focusedDates = getState().transactions.trackedDates;
+            const categories = await apiCalls.getFilterCategories(token, focusedDates.month, focusedDates.year); 
+            const justCatName = (categories.data).map(catObj => catObj.category); 
+            dispatch(setFilterCategories(justCatName)); 
+        }
+        catch(err) {
+            alert('Error getting category filter'); 
+            console.log(err); 
+        }
+    }; 
+}; 
 
 export const setTransactions = transactions => {
     return {
@@ -50,6 +65,13 @@ export const setFilterDates = dates => {
     return {
         type: actionTypes.SET_DATE_FILTERS, 
         dates: dates
+    }; 
+}; 
+
+export const setFilterCategories = categoryObj => {
+    return {
+        type: actionTypes.SET_CATEGORY_FILTERS, 
+        categories: categoryObj
     }; 
 }; 
 

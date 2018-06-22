@@ -33,6 +33,14 @@ const reducer = (state = initialState, action) => {
                     dates: action.dates
                 }
             }; 
+        case actionTypes.SET_CATEGORY_FILTERS: 
+            return {
+                ...state, 
+                filters: {
+                    ...state.filters, 
+                    categories: action.categories
+                }
+            }; 
         default: 
             return state; 
     }

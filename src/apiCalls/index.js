@@ -23,3 +23,12 @@ export const getFilterDates = (token, month = null, year = null) => {
     // console.log(url)
     return instance.get(url, { headers: { 'x-auth-token': token } }); 
 }; 
+
+export const getFilterCategories = (token, month = null, year = null) => {
+    let url = '/transactions/categories'; 
+    if(month && year) {
+        url += `?month=${month}&year=${year}`
+    }
+    // console.log(url)
+    return instance.get(url, { headers: { 'x-auth-token': token } }); 
+}; 
