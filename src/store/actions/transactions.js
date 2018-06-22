@@ -15,6 +15,8 @@ export const getTransactions = token => {
                     transactionsWithJSDate.push({...transaction, date: calcTimezoneOffset(new Date(transaction.date))}); 
                 }
                 dispatch(setTransactions(transactionsWithJSDate)); 
+                dispatch(getFilterCategories(token));
+                dispatch(getFilterDates(token));
                 return; 
             }
             catch(err) {

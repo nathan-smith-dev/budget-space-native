@@ -32,8 +32,6 @@ export const registerAuthListeners = () => {
                 store.dispatch(authActions.setAuthToken(token)); 
                 if(token) {
                     store.dispatch(transactionActions.getTransactions(token)); 
-                    store.dispatch(transactionActions.getFilterDates(token)); 
-                    store.dispatch(transactionActions.getFilterCategories(token)); 
                 }
             }
             else {
