@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'; 
 import * as colors from '../../../assets/styles/colors'; 
 import { TableColumn, TableRow } from '../../Table'; 
+import ButtonIcon from '../../ButtonIcon/ButtonIcon'; 
 
 const transTableHeader = (props) => {
     return (
@@ -13,7 +14,14 @@ const transTableHeader = (props) => {
                 <Text style={[styles.headingText, {textAlign: 'right'}]}>Amount</Text>
             </TableColumn>
             <TableColumn grow={7}>
-                <Text style={[styles.headingText, {marginLeft: 15}]}>Category</Text>
+                <View style={styles.filterContainer}>
+                    <Text style={[styles.headingText, {marginLeft: 15}]}>Category</Text>
+                    <ButtonIcon 
+                        icon="ios-funnel" 
+                        color={colors.PRIMARY_COLOR} 
+                        size={20}
+                        onPress={() => alert('Handle filter')} />
+                </View>
             </TableColumn>
         </TableRow>
     ); 
@@ -22,6 +30,10 @@ const transTableHeader = (props) => {
 const styles = StyleSheet.create({
     headingText: {
         color: colors.DARK_COLOR
+    }, 
+    filterContainer: {
+        justifyContent: 'space-between', 
+        flexDirection: 'row'
     }
 }); 
 
