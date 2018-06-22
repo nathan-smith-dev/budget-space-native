@@ -8,9 +8,9 @@ const buttonOutline = (props) => {
     return (
         <Touchable onPress={props.onPress}>
             <View style={[styles.container, {borderColor: props.color}]}>
-                {props.iconLeft && <Icon style={styles.iconLeft} name={props.iconLeft} size={30} color={props.color} />}                 
-                <Text style={[styles.text, {color: props.color}]}>{props.text}</Text>
-                {props.iconRight && <Icon style={styles.iconRight} name={props.iconRight} size={30} color={props.color} />}
+                {props.iconLeft && <Icon style={styles.iconLeft} name={props.iconLeft} size={props.size*1.5} color={props.color} />}                 
+                <Text style={[styles.text, {color: props.color, fontSize: props.size}]}>{props.text}</Text>
+                {props.iconRight && <Icon style={styles.iconRight} name={props.iconRight} size={props.size*1.5} color={props.color} />}
             </View>
         </Touchable>
     ); 
@@ -22,6 +22,7 @@ buttonOutline.propTypes = {
     onPress: PropTypes.func.isRequired, 
     iconRight: PropTypes.string, 
     iconLeft: PropTypes.string, 
+    size: PropTypes.number.isRequired
 }; 
 
 const styles = StyleSheet.create({
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
         borderRadius: 5
     }, 
     text: {
-        fontSize: 20, 
         fontWeight: "800"
     }, 
     iconLeft: {
