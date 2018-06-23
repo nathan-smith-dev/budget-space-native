@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const today = new Date(); 
 const initialState = {
     transactions: [], 
+    categories: [],
     filters: {
         dates: [], 
         categories: [], 
@@ -52,6 +53,11 @@ const reducer = (state = initialState, action) => {
                     ...state.filters, 
                     activeFilters: action.activeFilters
                 }
+            }; 
+        case actionTypes.SET_USER_CATEGORIES: 
+            return {
+                ...state, 
+                categories: action.categories
             }; 
         default: 
             return state; 

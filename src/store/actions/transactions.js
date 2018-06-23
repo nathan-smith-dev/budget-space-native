@@ -71,6 +71,25 @@ export const getFilterCategories = token => {
     }; 
 }; 
 
+export const getUserCategories = token => {
+    return async (dispatch, getState) => {
+        let tries = 0; 
+        while(tries < 5) {
+            try {
+                const categories = await apiCalls.getUserCategories(token); 
+                dispatch(setUserCategories(categories.data)); 
+                return; 
+            }
+            catch(err) {
+                // alert('Error getting category filter'); 
+                tries++; 
+                console.log(err); 
+            }
+        }
+        alert('Error getting user categories');
+    }; 
+}; 
+
 export const setTransactions = transactions => {
     return {
         type: actionTypes.SET_TRANSACTIONS, 
@@ -103,5 +122,12 @@ export const setActiveFilters = activeFilters => {
     return {
         type: actionTypes.SET_ACTIVE_FILTERS, 
         activeFilters: activeFilters
+    };
+}; 
+
+export const setUserCategories = categories => {
+    return {
+        type: actionTypes.SET_USER_CATEGORIES, 
+        categories: categories
     };
 }; 

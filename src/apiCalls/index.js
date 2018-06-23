@@ -32,3 +32,9 @@ export const getFilterCategories = (token, month = null, year = null) => {
     // console.log(url)
     return instance.get(url, { headers: { 'x-auth-token': token } }); 
 }; 
+
+export const getUserCategories = (token) => {
+    let url = '/categories'; 
+    // console.log(url)
+    return instance.get(url, { headers: { 'x-auth-token': token } }); 
+}; 
