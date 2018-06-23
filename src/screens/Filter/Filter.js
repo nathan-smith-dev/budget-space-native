@@ -59,20 +59,25 @@ class FilterScreen extends Component {
         return (
             <Backdrop>
                 <View style={styles.container}>
-                    <MonthYearSelector 
-                        color={colors.PRIMARY_COLOR}
-                        selectedYear={focusedDates && focusedDates.year}
-                        selectedMonth={focusedDates && focusedDates.month}
-                        onMonthChange={this.handleMonthChange}
-                        onYearChange={this.handleYearChange} />
-                    <FilterSelector 
-                        primaryData={primaryFilters}
-                        secondaryData={secondaryFilters}
-                        onPrimaryFilterChange={this.handlePrimaryFilterChange}
-                        primaryFilterValue={filters.activeFilters.primaryFilter}
-                        onSecondaryFilterChange={this.handleSecondaryFilterChange}
-                        secondaryFilterValue={filters.activeFilters.secondaryFilter}
-                    />
+                    <View style={styles.subcontainer}>
+                        <MonthYearSelector 
+                            color={colors.PRIMARY_COLOR}
+                            selectedYear={focusedDates && focusedDates.year}
+                            selectedMonth={focusedDates && focusedDates.month}
+                            onMonthChange={this.handleMonthChange}
+                            onYearChange={this.handleYearChange} />
+                    </View>
+                    <View>
+                        <FilterSelector 
+                            color={colors.PRIMARY_COLOR}
+                            primaryData={primaryFilters}
+                            secondaryData={secondaryFilters}
+                            onPrimaryFilterChange={this.handlePrimaryFilterChange}
+                            primaryFilterValue={filters.activeFilters.primaryFilter}
+                            onSecondaryFilterChange={this.handleSecondaryFilterChange}
+                            secondaryFilterValue={filters.activeFilters.secondaryFilter}
+                        />
+                    </View>
                 </View>
             </Backdrop>
         ); 
@@ -81,7 +86,10 @@ class FilterScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 15
+        margin: 15, 
+    }, 
+    subcontainer: {
+        marginBottom: 20
     }, 
     focusedDatesContainer: {
         flexDirection: 'row', 

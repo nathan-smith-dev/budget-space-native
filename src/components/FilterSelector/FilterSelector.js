@@ -1,7 +1,7 @@
 import React from 'react'; 
 import PropTypes from 'prop-types'; 
 import { View, StyleSheet, Text } from 'react-native'; 
-import Picker from '../../components/Picker/Picker'; 
+import Dropdown from '../../components/Dropdown/Dropdown'; 
 import * as colors from '../../assets/styles/colors'; 
 
 const filterSelector = ({ primaryData, onPrimaryFilterChange, primaryFilterValue, secondaryData, onSecondaryFilterChange, secondaryFilterValue, color, style }) => {
@@ -10,20 +10,24 @@ const filterSelector = ({ primaryData, onPrimaryFilterChange, primaryFilterValue
             <Text style={styles.headingText}>Additional Filters</Text>
             <View style={styles.container}>
                 <View>
-                    <Text>Primary Filter</Text>
-                    <Picker 
+                    <Text style={styles.subHeadingText}>Primary Filter</Text>
+                    <Dropdown 
+                        value={primaryFilterValue}
                         data={primaryData}
-                        onValueChange={onPrimaryFilterChange}
-                        selectedValue={primaryFilterValue}
+                        size={14}
+                        onSelect={onPrimaryFilterChange}
                         color={color} />
+                    />
                 </View>
                 <View>
-                    <Text>Secondary Filter</Text>
-                    <Picker 
+                    <Text style={styles.subHeadingText}>Secondary Filter</Text>
+                    <Dropdown 
                         data={secondaryData}
-                        onValueChange={onSecondaryFilterChange}
-                        selectedValue={secondaryFilterValue}
-                        color={color} />
+                        onSelect={onSecondaryFilterChange}
+                        value={secondaryFilterValue}
+                        size={14}
+                        color={color} 
+                    />
                 </View>
             </View>
         </View>
@@ -38,6 +42,9 @@ const styles = StyleSheet.create({
     headingText: {
         fontSize: 11,
         color: colors.DARK_COLOR, 
+        marginBottom: 5
+    }, 
+    subHeadingText: {
         marginBottom: 2
     }
 });

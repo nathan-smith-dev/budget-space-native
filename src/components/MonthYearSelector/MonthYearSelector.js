@@ -1,7 +1,7 @@
 import React from 'react'; 
 import PropTypes from 'prop-types'; 
 import { View, Text, StyleSheet } from 'react-native'; 
-import Picker from '../../components/Picker/Picker'; 
+import Dropdown from '../../components/Dropdown/Dropdown'; 
 import * as colors from '../../assets/styles/colors'; 
 
 const selector = ({ selectedMonth, selectedYear, onMonthChange, onYearChange, color }) => {
@@ -29,22 +29,20 @@ const selector = ({ selectedMonth, selectedYear, onMonthChange, onYearChange, co
         <View>
             <Text style={styles.headingText}>Focused Month/Year</Text>
             <View style={styles.focusedDatesContainer}>
-                <View style={{width: '45%'}}>
-                    <Text>Month</Text>
-                    <Picker 
-                        style={{width: '100%'}}
-                        selectedValue={selectedMonth}
-                        onValueChange={onMonthChange}
+                <View>
+                    <Text style={styles.subHeadingText}>Month</Text>
+                    <Dropdown 
+                        value={selectedMonth}
+                        onSelect={onMonthChange}
                         data={months}
                         color={color}
                     />
                 </View>
-                <View style={{width: '45%'}}>
-                    <Text>Year</Text>
-                    <Picker 
-                        style={{width: '100%'}}
-                        selectedValue={selectedYear}
-                        onValueChange={onYearChange}
+                <View>
+                    <Text style={styles.subHeadingText}>Year</Text>
+                    <Dropdown 
+                        value={selectedYear}
+                        onSelect={onYearChange}
                         data={years}
                         color={color}
                     />
@@ -62,7 +60,10 @@ const styles = StyleSheet.create({
     headingText: {
         fontSize: 11,
         color: colors.DARK_COLOR, 
-        marginBottom: 2
+        marginBottom: 5
+    }, 
+    subHeadingText: {
+        marginBottom: 2 
     }
 });
 
