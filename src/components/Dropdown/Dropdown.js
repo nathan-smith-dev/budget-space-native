@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const dropdown = ({ data, color, size, disabled, onSelect, value }) => {
+const dropdown = ({ data, color, size, disabled, onSelect, value, placeholder }) => {
     const labels = data.map(item => item.label); 
     const currentValue = getLabelFromValue(value, data);
 
@@ -18,7 +18,7 @@ const dropdown = ({ data, color, size, disabled, onSelect, value }) => {
             onSelect={(index) => mapIndexToData(index, data, onSelect)}
         >
             <View style={styles.textContainer}>
-                <Text style={{fontSize: size, color: color}}>{currentValue}</Text>
+                <Text style={{fontSize: size, color: color}}>{currentValue || placeholder}</Text>
                 <Icon 
                     style={{marginLeft: 3}}
                     name="md-arrow-dropdown" 
@@ -35,13 +35,13 @@ const mapIndexToData = (index, data, callback) => {
 
 const getLabelFromValue = (value, data) => {
     const itemObj = data.filter(item => item.value === value)[0]; 
-    console.log(itemObj); 
-    return itemObj.label; 
+    if(itemObj)
+        return itemObj.label; 
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 5, 
+        padding: 10, 
         borderWidth: 1, 
         borderRadius: 5
     }, 
@@ -56,7 +56,9 @@ dropdown.propTypes = {
     color: PropTypes.string.isRequired, 
     size: PropTypes.number, 
     disabled: PropTypes.bool, 
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired, 
+    value: PropTypes.any, 
+    placeholder: PropTypes.string
 }; 
 
 export default dropdown; 

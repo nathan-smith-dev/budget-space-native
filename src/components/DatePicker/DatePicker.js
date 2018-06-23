@@ -13,6 +13,7 @@ class DatePicker extends Component {
         onChange: PropTypes.func.isRequired, 
         selectedDate: PropTypes.any.isRequired, 
         dayHeaderColor: PropTypes.string,
+        size: PropTypes.number
     }
 
     state = {
@@ -35,7 +36,7 @@ class DatePicker extends Component {
 
     render() {
         const { modalVisible } = this.state; 
-        const { selectedDate, onChange, color, textColor, dayHeaderColor } = this.props; 
+        const { selectedDate, onChange, color, textColor, dayHeaderColor, size } = this.props; 
 
         return (
             <View>
@@ -44,7 +45,7 @@ class DatePicker extends Component {
                     color={color}
                     onPress={this.handleToggleModal}
                     iconRight="md-arrow-dropdown"
-                    size={14} />
+                    size={size} />
                 <Modal
                     visible={modalVisible}
                     onRequestClose={this.handleToggleModal}
@@ -53,7 +54,7 @@ class DatePicker extends Component {
                 >
                     <View style={styles.modalContainer}>
                         <View>
-                            <Text style={styles.headerText}>Select Date</Text>
+                            <Text style={[styles.headerText, {fontSize: size}]}>Select Date</Text>
                             <Calendar
                                 style={styles.calendarWrapper}
                                 barView={{backgroundColor: color, borderTopLeftRadius: 5, borderTopRightRadius: 5}}
@@ -93,7 +94,6 @@ const styles = StyleSheet.create({
         fontWeight: '800'
     }, 
     headerText: {
-        fontSize: 16, 
         color: colors.DARK_COLOR, 
         textAlign: 'center', 
         marginBottom: 2

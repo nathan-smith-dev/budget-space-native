@@ -22,7 +22,7 @@ buttonOutline.propTypes = {
     onPress: PropTypes.func.isRequired, 
     iconRight: PropTypes.string, 
     iconLeft: PropTypes.string, 
-    size: PropTypes.number.isRequired, 
+    size: PropTypes.number, 
     fontWeight: PropTypes.string
 }; 
 
