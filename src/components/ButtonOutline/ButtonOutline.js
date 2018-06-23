@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const buttonOutline = (props) => {
     return (
         <Touchable onPress={props.onPress}>
-            <View style={[styles.container, {borderColor: props.color}]}>
+            <View style={[styles.container, {borderColor: props.color}, {...props.style}]}>
                 {props.iconLeft && <Icon style={styles.iconLeft} name={props.iconLeft} size={props.size*1.5} color={props.color} />}                 
                 <Text style={{color: props.color, fontSize: props.size, fontWeight: props.fontWeight}}>{props.text}</Text>
                 {props.iconRight && <Icon style={styles.iconRight} name={props.iconRight} size={props.size*1.5} color={props.color} />}

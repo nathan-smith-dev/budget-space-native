@@ -13,7 +13,7 @@ class DatePicker extends Component {
         onChange: PropTypes.func.isRequired, 
         selectedDate: PropTypes.any.isRequired, 
         dayHeaderColor: PropTypes.string,
-        size: PropTypes.number
+        size: PropTypes.number, 
     }
 
     state = {
@@ -36,7 +36,7 @@ class DatePicker extends Component {
 
     render() {
         const { modalVisible } = this.state; 
-        const { selectedDate, onChange, color, textColor, dayHeaderColor, size } = this.props; 
+        const { selectedDate, color, textColor, dayHeaderColor, size, valid} = this.props; 
 
         return (
             <View>

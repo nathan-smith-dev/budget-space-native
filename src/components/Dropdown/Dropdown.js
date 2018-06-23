@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; 
 import ModalDropdown from 'react-native-modal-dropdown';
 
-const dropdown = ({ data, color, size, disabled, onSelect, value, placeholder }) => {
+const dropdown = ({ data, color, size, disabled, onSelect, value, placeholder , style}) => {
     const labels = data.map(item => item.label); 
     const currentValue = getLabelFromValue(value, data);
 
@@ -12,7 +12,7 @@ const dropdown = ({ data, color, size, disabled, onSelect, value, placeholder })
         <ModalDropdown 
             options={labels}
             defaultValue={currentValue}
-            style={[styles.container, {borderColor: color}]}
+            style={[styles.container, {borderColor: color}, {...style}]}
             dropdownTextStyle={{fontSize: size, color: color}}
             disabled={disabled}
             onSelect={(index) => mapIndexToData(index, data, onSelect)}
@@ -58,7 +58,8 @@ dropdown.propTypes = {
     disabled: PropTypes.bool, 
     onSelect: PropTypes.func.isRequired, 
     value: PropTypes.any, 
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string, 
+    style: PropTypes.object
 }; 
 
 export default dropdown; 
