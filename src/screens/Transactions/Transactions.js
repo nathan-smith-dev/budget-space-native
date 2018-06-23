@@ -54,7 +54,11 @@ class TransactionsScreen extends Component {
             screen: 'budget-space-native.TransactionFormScreen', 
             title: 'New Transaction', 
             animated: true, 
-            animationType: 'fade'
+            animationType: 'fade', 
+            passProps: {
+                isNew: true, 
+                isEdit: false
+            }
         }); 
     }
     

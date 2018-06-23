@@ -32,7 +32,7 @@ class TransactionFormScreen extends Component {
             touched: false
         }, 
         description: {
-            value: null, 
+            value: '', 
             valid: true
         }
     }
@@ -98,7 +98,7 @@ class TransactionFormScreen extends Component {
 
     isStateFormsValid = () => {
         const { amount, categoryId } = this.state; 
-        if(amount.valid || categoryId.valid) return true; 
+        if(amount.valid && categoryId.valid) return true; 
         else {
             this.setState(prevState => {
                 return {
@@ -114,6 +114,19 @@ class TransactionFormScreen extends Component {
             }); 
         }
         return false; 
+    }
+
+    handleOnSubmit = () => {
+        if(!this.isStateFormsValid()) return; 
+
+        const { isNew, isEdit } = this.props;
+        if(isNew) this.sendNewTransaction(); 
+        else if(isEdit) this.updateTransaction(); 
+    }
+
+    sendNewTransaction = () => {
+        alert('Send new transaction'); 
+        console.log(this.state); 
     }
 
     render() {
@@ -196,7 +209,7 @@ class TransactionFormScreen extends Component {
                             size={14}
                             color={colors.SUCCESS_COLOR}
                             text="Submit"
-                            onPress={() => this.isStateFormsValid()}
+                            onPress={this.handleOnSubmit}
                         />
                     </View>
                 </View>
