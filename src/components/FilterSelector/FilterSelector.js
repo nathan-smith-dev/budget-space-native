@@ -16,7 +16,7 @@ const filterSelector = ({ primaryData, onPrimaryFilterChange, primaryFilterValue
                         data={primaryData}
                         size={14}
                         onSelect={onPrimaryFilterChange}
-                        color={color} />
+                        color={color}
                     />
                 </View>
                 <View>
