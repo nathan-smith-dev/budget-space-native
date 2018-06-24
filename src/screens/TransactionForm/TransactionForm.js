@@ -132,6 +132,7 @@ class TransactionFormScreen extends Component {
     render() {
         const { date, categoryId, type, amount, description } = this.state;
         const { categories } = this.props; 
+        if(!categories) return; 
         const categoryData = categories.map(cat => {return {value: cat.id, label: cat.category}});
     
         return (
