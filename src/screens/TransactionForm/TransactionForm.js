@@ -81,7 +81,7 @@ class TransactionFormScreen extends Component {
                     ...prevState.amount, 
                     value: amount, 
                     touched: true, 
-                    valid: true
+                    valid: amount !== ''
                 }
             }
         }); 
@@ -130,15 +130,15 @@ class TransactionFormScreen extends Component {
         const { amount, date, description, categoryId } = this.state;
         const { token, getTransactions } = this.props;
         const transObj = {
-            amount: amount.value, 
+            amount: parseFloat(amount.value), // send as a number 
             date: date.value.toDate(),
             desc: description.value, 
             categoryId: categoryId.value
         }; 
-        // console.log(transObj); 
-        const postedDate = await apiCalls.createTransaction(token, transObj); 
-        console.log(postedDate); 
-        getTransactions(token); 
+        console.log(transObj); 
+        // const postedDate = await apiCalls.createTransaction(token, transObj); 
+        // console.log(postedDate); 
+        // getTransactions(token); 
     }
 
     render() {

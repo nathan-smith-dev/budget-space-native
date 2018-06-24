@@ -10,12 +10,19 @@ const numInput = ({ color, placeholder, onChange, value, size, style }) => {
                 style={{fontSize: size, color: color, padding: 0}}
                 keyboardType='numeric'
                 placeholder={placeholder}
-                onChangeText={(text) => onChange(+text)}
-                value={value ? value+'' : null}
+                onChangeText={(text) => onChange(smartNumberFormat(text))}
+                value={value}
             />
         </View>
     ); 
 };
+
+const smartNumberFormat = text => {
+    let cleanAmount = text.replace(/\D/g,''); // removes all non numeric characters
+    cleanAmount = cleanAmount.slice(0, -2) +"."+cleanAmount.slice(-2); // add decimal point back
+    if(cleanAmount.length === 1 && cleanAmount === ".") cleanAmount = ""; 
+    return cleanAmount; 
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -29,7 +36,7 @@ numInput.propTypes = {
     color: PropTypes.string,
     placeholder: PropTypes.string.isRequired, 
     onChange: PropTypes.func.isRequired, 
-    value: PropTypes.number, 
+    value: PropTypes.string, 
     size: PropTypes.number, 
     style: PropTypes.object
 }
