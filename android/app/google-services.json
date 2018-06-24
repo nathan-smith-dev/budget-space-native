@@ -23,16 +23,12 @@
           }
         },
         {
-          "client_id": "201170765759-jjg6erk3u99ql5c6kgdao9vb7obiussv.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "201170765759-n1tiqkgf1tfsvaeog1brpivsoc9nuf20.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "201170765759-vgdgl2o0nchv3ura5ivi69rejruch5o7.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "201170765759-knmg8qnslumh9oa1ea18s8ud4708p0lv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.budgetspacefinance",
+            "certificate_hash": "c53f83b0213cfd3a95869e350cd8501e844aab47"
+          }
         },
         {
           "client_id": "201170765759-vgdgl2o0nchv3ura5ivi69rejruch5o7.apps.googleusercontent.com",

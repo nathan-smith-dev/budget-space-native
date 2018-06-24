@@ -1,15 +1,16 @@
 import React from 'react'; 
 import PropTypes from 'prop-types'; 
-import { View, TextInput, StyleSheet } from 'react-native'; 
+import { View, TextInput, StyleSheet, Platform } from 'react-native'; 
 
 const textInput = ({ placeholder, value, onChange, color, size }) => {
     return (
         <View style={[styles.container, {borderColor: color}]}>
             <TextInput 
-                style={{fontSize: size, color: color}}
+                style={{fontSize: size, color: color, padding: 0}}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChange}
+                underlineColorAndroid="transparent"
             />
         </View>
     ); 
@@ -17,7 +18,7 @@ const textInput = ({ placeholder, value, onChange, color, size }) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10, 
+        padding: Platform.OS === 'ios' ? 10 : 6, 
         borderRadius: 5,
         borderWidth: 1
     }

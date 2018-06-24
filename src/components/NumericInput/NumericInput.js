@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import { View, StyleSheet, TextInput } from 'react-native'; 
+import { View, StyleSheet, TextInput, Platform } from 'react-native'; 
 
 const numInput = ({ color, placeholder, onChange, value, size, style }) => {
     return (
         <View style={[styles.container, {borderColor: color}, {...style}]}>
             <TextInput 
-                style={{fontSize: size, color: color}}
+                underlineColorAndroid="transparent"
+                style={{fontSize: size, color: color, padding: 0}}
                 keyboardType='numeric'
                 placeholder={placeholder}
                 onChangeText={(text) => onChange(+text)}
@@ -19,7 +20,7 @@ const numInput = ({ color, placeholder, onChange, value, size, style }) => {
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1, 
-        padding: 10, 
+        padding: Platform.OS === 'ios' ? 10 : 6, 
         borderRadius: 5
     }
 }); 
