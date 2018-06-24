@@ -135,10 +135,10 @@ class TransactionFormScreen extends Component {
             desc: description.value, 
             categoryId: categoryId.value
         }; 
-        console.log(transObj); 
-        // const postedDate = await apiCalls.createTransaction(token, transObj); 
-        // console.log(postedDate); 
-        // getTransactions(token); 
+        // console.log(transObj); 
+        const postedDate = await apiCalls.createTransaction(token, transObj); 
+        console.log(postedDate.data); 
+        getTransactions(token); 
     }
 
     render() {

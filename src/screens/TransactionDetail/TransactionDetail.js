@@ -15,7 +15,7 @@ class TransactionDetailScreen extends Component {
     }
 
     render() {
-        const { id, amount, date, category, type } = this.props; 
+        const { id, amount, date, category, type, desc } = this.props; 
         return (
             <Backdrop>
                 <View style={styles.container}>
@@ -28,6 +28,8 @@ class TransactionDetailScreen extends Component {
                         <Text style={styles.detailText}>{category}</Text>
                         <Text style={styles.headingText}>Type</Text>
                         <Text style={styles.detailText}>{type}</Text>
+                        <Text style={styles.headingText}>Description</Text>
+                        <Text style={styles.detailText}>{desc}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
                         <ButtonOutline 
