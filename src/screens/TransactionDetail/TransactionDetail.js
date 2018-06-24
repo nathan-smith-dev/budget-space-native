@@ -11,11 +11,34 @@ class TransactionDetailScreen extends Component {
         amount: PropTypes.number.isRequired, 
         date: PropTypes.instanceOf(Date).isRequired, 
         type: PropTypes.string.isRequired, 
-        category: PropTypes.string.isRequired
+        category: PropTypes.string.isRequired, 
+        editable: PropTypes.bool.isRequired,
+        onDelete: PropTypes.func, 
+        onEdit: PropTypes.func
     }
 
     render() {
-        const { id, amount, date, category, type, desc } = this.props; 
+        const { id, amount, date, category, type, desc, editable, onEdit, onDelete } = this.props; 
+        let buttons = null; 
+        if(editable) {
+            buttons = (
+                <View style={styles.buttonContainer}>
+                    <ButtonOutline 
+                        text="Edit" 
+                        size={14}
+                        iconRight="md-create" 
+                        color={colors.PRIMARY_COLOR}
+                        onPress={() => onEdit(id, type)} />
+                    <ButtonOutline 
+                        text="Delete" 
+                        size={14}
+                        iconRight="ios-trash" 
+                        color={colors.DANGER_COLOR}
+                        onPress={() => onDelete(id, type)} />
+                </View>
+            ); 
+        }
+
         return (
             <Backdrop>
                 <View style={styles.container}>
@@ -31,20 +54,7 @@ class TransactionDetailScreen extends Component {
                         <Text style={styles.headingText}>Description</Text>
                         <Text style={styles.detailText}>{desc}</Text>
                     </View>
-                    <View style={styles.buttonContainer}>
-                        <ButtonOutline 
-                            text="Edit" 
-                            size={14}
-                            iconRight="md-create" 
-                            color={colors.PRIMARY_COLOR}
-                            onPress={() => alert('Handle edit')} />
-                        <ButtonOutline 
-                            text="Delete" 
-                            size={14}
-                            iconRight="ios-trash" 
-                            color={colors.DANGER_COLOR}
-                            onPress={() => alert('Handle delete')} />
-                    </View>
+                    {buttons}
                 </View>
             </Backdrop>
         );

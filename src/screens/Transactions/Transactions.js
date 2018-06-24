@@ -3,6 +3,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import Backdrop from '../../hoc/Backdrop/Backdrop' ; 
 import TransactionTable from '../../components/TransactionTable/TransactionTable'; 
 import { connect } from 'react-redux';
+import * as apiCalls from '../../apiCalls'; 
+import * as transactionActions from '../../store/actions/transactions'; 
 
 class TransactionsScreen extends Component {
     constructor(props) {
@@ -42,7 +44,12 @@ class TransactionsScreen extends Component {
         navigator.push({
             screen: 'budget-space-native.TransactionDetail', 
             title: 'Transaction Detail', 
-            passProps: {...transaction}, 
+            passProps: {
+                ...transaction, 
+                editable: true, 
+                onDelete: this.handleDeleteTransaction, 
+                onEdit: this.handleEditTransaction
+            }, 
             animated: true, 
             animationType: 'fade'
         }); 
@@ -60,6 +67,17 @@ class TransactionsScreen extends Component {
                 isEdit: false
             }
         }); 
+    }
+
+    handleDeleteTransaction = async (id, type) => {
+        const { token, navigator, getTransactions } = this.props; 
+        const deletedTransaction = await apiCalls.deleteTransaction(token, id, type); 
+        getTransactions(token); 
+        navigator.pop({ animationType: 'fade' }); 
+    }
+    
+    handleEditTransaction = (id, type) => {
+        console.log('Edit ' + id + " " + type); 
     }
     
     render() {
@@ -97,10 +115,17 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         currentUser: state.auth.currentUser,
+        token: state.auth.token,
         transactions: state.transactions.transactions,
         activeFilters: state.transactions.filters.activeFilters
-    }
-}
+    };
+}; 
 
-export default connect(mapStateToProps)(TransactionsScreen); 
+const mapDispatchToProps = dispatch => {
+    return {
+        getTransactions: token => dispatch(transactionActions.getTransactions(token)), 
+    }; 
+}; 
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsScreen); 
 

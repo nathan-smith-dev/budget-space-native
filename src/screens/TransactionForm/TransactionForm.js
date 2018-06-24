@@ -128,7 +128,7 @@ class TransactionFormScreen extends Component {
 
     sendNewTransaction = async () => {
         const { amount, date, description, categoryId } = this.state;
-        const { token, getTransactions } = this.props;
+        const { token, getTransactions, navigator } = this.props;
         const transObj = {
             amount: parseFloat(amount.value), // send as a number 
             date: date.value.toDate(),
@@ -139,6 +139,7 @@ class TransactionFormScreen extends Component {
         const postedDate = await apiCalls.createTransaction(token, transObj); 
         console.log(postedDate.data); 
         getTransactions(token); 
+        navigator.pop({ animationType: 'fade' }); 
     }
 
     render() {

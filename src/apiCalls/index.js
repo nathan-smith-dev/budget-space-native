@@ -44,3 +44,9 @@ export const createTransaction = (token, transObj) => {
     
     return instance.post(url, transObj, { headers: { 'x-auth-token': token } }); 
 }; 
+
+export const deleteTransaction = (token, id, type) => {
+    const url = type === 'Income' ? `/incomes/${id}` : `/expenses/${id}`; 
+
+    return instance.delete(url, { headers: { 'x-auth-token': token } });
+}; 
