@@ -1,2 +1,1 @@
-- Add + for new transaction
-- Add edit and delete for transaction detail 
+- catch all failed api calls

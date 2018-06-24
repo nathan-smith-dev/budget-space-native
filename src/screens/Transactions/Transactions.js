@@ -76,8 +76,19 @@ class TransactionsScreen extends Component {
         navigator.pop({ animationType: 'fade' }); 
     }
     
-    handleEditTransaction = (id, type) => {
-        console.log('Edit ' + id + " " + type); 
+    handleEditTransaction = (id) => {
+        const { navigator, transactions } = this.props; 
+        navigator.push({
+            screen: 'budget-space-native.TransactionFormScreen', 
+            title: 'Edit Transaction', 
+            animated: true, 
+            animationType: 'fade', 
+            passProps: {
+                transaction: transactions.filter(trans => trans.id === id)[0],
+                isNew: false, 
+                isEdit: true
+            }
+        }); 
     }
     
     render() {

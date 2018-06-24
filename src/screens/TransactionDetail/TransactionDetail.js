@@ -28,7 +28,7 @@ class TransactionDetailScreen extends Component {
                         size={14}
                         iconRight="md-create" 
                         color={colors.PRIMARY_COLOR}
-                        onPress={() => onEdit(id, type)} />
+                        onPress={() => onEdit(id)} />
                     <ButtonOutline 
                         text="Delete" 
                         size={14}

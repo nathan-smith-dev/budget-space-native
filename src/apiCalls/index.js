@@ -46,7 +46,15 @@ export const createTransaction = (token, transObj) => {
 }; 
 
 export const deleteTransaction = (token, id, type) => {
-    const url = type === 'Income' ? `/incomes/${id}` : `/expenses/${id}`; 
+    const url = type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
 
     return instance.delete(url, { headers: { 'x-auth-token': token } });
 }; 
+
+export const updateTransaction = (token, transObj) => {
+    const { id, type } = transObj; 
+    const url = type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
+    console.log(transObj);
+
+    return instance.put(url, transObj, { headers: { 'x-auth-token': token } })
+}

@@ -37,6 +37,47 @@ class TransactionFormScreen extends Component {
             value: '', 
             valid: true
         }
+    };
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log(nextProps); 
+        console.log(prevState); 
+        // return {
+        //     ...prevState
+        // }
+        if(nextProps.isNew) return {...prevState}; 
+        
+        else if(nextProps.isEdit) {
+            return {
+                ...prevState,
+                date: {
+                    value: moment(nextProps.transaction.date),
+                    valid: true
+                },
+                categoryId: {
+                    value: nextProps.transaction.categoryId, 
+                    valid: true,
+                    touched: false
+                }, 
+                type: {
+                    value: nextProps.transaction.type,
+                    valid: true
+                }, 
+                amount: {
+                    value: nextProps.transaction.amount.toFixed(2), 
+                    valid: true, 
+                    touched: false
+                }, 
+                description: {
+                    value: nextProps.transaction.desc, 
+                    valid: true
+                }
+            }
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.state);
     }
 
     handleOnDateChange = date => {
@@ -142,10 +183,34 @@ class TransactionFormScreen extends Component {
         navigator.pop({ animationType: 'fade' }); 
     }
 
+    updateTransaction = async () => {
+        const { amount, date, description, categoryId } = this.state;
+        const { token, getTransactions, navigator } = this.props;
+        const { type, id } = this.props.transaction; 
+
+        const transObj = {
+            id: id,
+            amount: parseFloat(amount.value), // send as a number 
+            date: date.value.toDate(),
+            desc: description.value, 
+            categoryId: categoryId.value, 
+            type: type
+        }; 
+
+        try {
+            const postedDate = await apiCalls.updateTransaction(token, transObj); 
+            navigator.pop({ animationType: 'fade' }); 
+            navigator.pop({ animationType: 'fade' }); 
+            getTransactions(token); 
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+    }
+
     render() {
         const { date, categoryId, type, amount, description } = this.state;
         const { categories } = this.props; 
-        if(!categories) return; 
         const categoryData = categories.map(cat => {return {value: cat.id, label: cat.category}});
     
         return (
@@ -272,6 +337,6 @@ mapDispatchToProps = dispatch => {
     return {
         getTransactions: token => dispatch(transactionActions.getTransactions(token))
     };
-};
+}; 
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionFormScreen); 
