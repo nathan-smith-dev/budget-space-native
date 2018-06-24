@@ -10,6 +10,8 @@ import NumericInput from '../../components/NumericInput/NumericInput';
 import TextInput from '../../components/TextInput/TextInput'; 
 import ButtonOutline from '../../components/ButtonOutline/ButtonOutline'; 
 import moment from 'moment'; 
+import * as apiCalls from '../../apiCalls'; 
+import * as transactionActions from '../../store/actions/transactions'; 
 
 class TransactionFormScreen extends Component {
     state = {
@@ -124,9 +126,19 @@ class TransactionFormScreen extends Component {
         else if(isEdit) this.updateTransaction(); 
     }
 
-    sendNewTransaction = () => {
-        alert('Send new transaction'); 
-        console.log(this.state); 
+    sendNewTransaction = async () => {
+        const { amount, date, description, categoryId } = this.state;
+        const { token, getTransactions } = this.props;
+        const transObj = {
+            amount: amount.value, 
+            date: date.value.toDate(),
+            desc: description.value, 
+            categoryId: categoryId.value
+        }; 
+        // console.log(transObj); 
+        const postedDate = await apiCalls.createTransaction(token, transObj); 
+        console.log(postedDate); 
+        getTransactions(token); 
     }
 
     render() {
@@ -250,14 +262,15 @@ const invalidStyle = {
 
 mapStateToProps = state => {
     return {
-        categories: state.transactions.categories
-    }
-}
+        categories: state.transactions.categories, 
+        token: state.auth.token
+    };
+}; 
 
 mapDispatchToProps = dispatch => {
     return {
-        
-    }
-}
+        getTransactions: token => dispatch(transactionActions.getTransactions(token))
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionFormScreen); 

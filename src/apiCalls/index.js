@@ -38,3 +38,9 @@ export const getUserCategories = (token) => {
     // console.log(url)
     return instance.get(url, { headers: { 'x-auth-token': token } }); 
 }; 
+
+export const createTransaction = (token, transObj) => {
+    const url = transObj.type === 'income' ? `/incomes` : `/expenses`; 
+    
+    return instance.post(url, transObj, { headers: { 'x-auth-token': token } }); 
+}; 
