@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native'; 
 import Backdrop from '../../hoc/Backdrop/Backdrop'; 
 import { connect } from 'react-redux'; 
 import Dropdown from '../../components/Dropdown/Dropdown'; 
@@ -232,83 +232,87 @@ class TransactionFormScreen extends Component {
     
         return (
             <Backdrop>
-                <View style={styles.container}>
-                    <View>
-                        <View style={styles.formContainer}>
-                            <Text style={styles.label}>Date</Text>
-                            <DatePicker 
-                                selectedDate={date.value}
-                                color={colors.PRIMARY_COLOR}
-                                textColor={colors.LIGHT_COLOR}
-                                dayHeaderColor={colors.SECONDARY_COLOR}
-                                onChange={this.handleOnDateChange}
-                            />
-                        </View>
-                        <View style={styles.formContainer}>
-                            <Text style={styles.label}>Type</Text>
-                            <Dropdown
-                                value={type.value}
-                                data={[{value: 'expense', label: 'Expense'}, {value: 'income', label: 'Income'}]}
-                                color={colors.PRIMARY_COLOR}
-                                onSelect={this.handleTypeChange}
-                                placeholder="Select Type"
-                                size={14}
-                            />
-                        </View>
-                        <View style={styles.formContainer}>
-                            <Text style={styles.label}>Amount</Text>
-                            <NumericInput
-                                style={!amount.valid && amount.touched ? invalidStyle : null}
-                                size={14}
-                                color={colors.PRIMARY_COLOR}
-                                placeholder="0.00"
-                                onChange={this.handleAmountChange}
-                                value={amount.value}
-                            />
-                        </View>
-                        <View style={styles.formContainer}>
-                            <Text style={styles.label}>Category</Text>
-                            <View style={styles.categoryContainer}>
-                                <View style={{width: '85%'}}>
-                                    <Dropdown 
-                                        style={!categoryId.valid && categoryId.touched ? invalidStyle : null}
-                                        value={categoryId.value}
-                                        data={categoryData}
+                <KeyboardAvoidingView style={styles.container}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <ScrollView>
+                            <View>
+                                <View style={styles.formContainer}>
+                                    <Text style={styles.label}>Date</Text>
+                                    <DatePicker 
+                                        selectedDate={date.value}
                                         color={colors.PRIMARY_COLOR}
-                                        onSelect={this.handleOnCategoryChange}
-                                        placeholder="Select Category"
+                                        textColor={colors.LIGHT_COLOR}
+                                        dayHeaderColor={colors.SECONDARY_COLOR}
+                                        onChange={this.handleOnDateChange}
+                                    />
+                                </View>
+                                <View style={styles.formContainer}>
+                                    <Text style={styles.label}>Type</Text>
+                                    <Dropdown
+                                        value={type.value}
+                                        data={[{value: 'expense', label: 'Expense'}, {value: 'income', label: 'Income'}]}
+                                        color={colors.PRIMARY_COLOR}
+                                        onSelect={this.handleTypeChange}
+                                        placeholder="Select Type"
                                         size={14}
                                     />
                                 </View>
-                                <ButtonIcon 
-                                    icon="md-add-circle"
-                                    size={30}
-                                    onPress={() => alert('Handle new csategory')}
-                                    color={colors.PRIMARY_COLOR} 
+                                <View style={styles.formContainer}>
+                                    <Text style={styles.label}>Amount</Text>
+                                    <NumericInput
+                                        style={!amount.valid && amount.touched ? invalidStyle : null}
+                                        size={14}
+                                        color={colors.PRIMARY_COLOR}
+                                        placeholder="0.00"
+                                        onChange={this.handleAmountChange}
+                                        value={amount.value}
+                                    />
+                                </View>
+                                <View style={styles.formContainer}>
+                                    <Text style={styles.label}>Category</Text>
+                                    <View style={styles.categoryContainer}>
+                                        <View style={{width: '85%'}}>
+                                            <Dropdown 
+                                                style={!categoryId.valid && categoryId.touched ? invalidStyle : null}
+                                                value={categoryId.value}
+                                                data={categoryData}
+                                                color={colors.PRIMARY_COLOR}
+                                                onSelect={this.handleOnCategoryChange}
+                                                placeholder="Select Category"
+                                                size={14}
+                                            />
+                                        </View>
+                                        <ButtonIcon 
+                                            icon="md-add-circle"
+                                            size={30}
+                                            onPress={() => alert('Handle new csategory')}
+                                            color={colors.PRIMARY_COLOR} 
+                                        />
+                                    </View>
+                                </View>
+                                <View style={styles.formContainer}>
+                                    <Text style={styles.label}>Description</Text>
+                                    <TextInput
+                                        size={14}
+                                        color={colors.PRIMARY_COLOR}
+                                        placeholder="Description"
+                                        onChange={this.handleDescChange}
+                                        value={description.value}
+                                    />
+                                </View>
+                            </View>
+                            <View style={styles.submitButton}>
+                                <ButtonOutline 
+                                    iconRight="ios-checkmark"
+                                    size={14}
+                                    color={colors.SUCCESS_COLOR}
+                                    text="Submit"
+                                    onPress={this.handleOnSubmit}
                                 />
                             </View>
-                        </View>
-                        <View style={styles.formContainer}>
-                            <Text style={styles.label}>Description</Text>
-                            <TextInput
-                                size={14}
-                                color={colors.PRIMARY_COLOR}
-                                placeholder="Description"
-                                onChange={this.handleDescChange}
-                                value={description.value}
-                            />
-                        </View>
-                    </View>
-                    <View style={styles.submitButton}>
-                        <ButtonOutline 
-                            iconRight="ios-checkmark"
-                            size={14}
-                            color={colors.SUCCESS_COLOR}
-                            text="Submit"
-                            onPress={this.handleOnSubmit}
-                        />
-                    </View>
-                </View>
+                        </ScrollView>
+                    </TouchableWithoutFeedback>
+                </KeyboardAvoidingView>
             </Backdrop>
         );
     }
@@ -334,6 +338,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }, 
     submitButton: {
+        marginTop: 20, 
         alignSelf: 'center'
     }
 }); 

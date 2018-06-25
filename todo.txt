@@ -1,4 +1,2 @@
 - add pull to refresh for transactions 
-- fix date modal
-- move screen for keyboard input
 - implement chart screen
