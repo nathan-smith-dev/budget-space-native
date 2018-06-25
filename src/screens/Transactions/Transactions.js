@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, RefreshControl } from 'react-native';
 import Backdrop from '../../hoc/Backdrop/Backdrop' ; 
 import TransactionTable from '../../components/TransactionTable/TransactionTable'; 
 import { connect } from 'react-redux';
@@ -101,9 +101,14 @@ class TransactionsScreen extends Component {
             }
         }); 
     }
+
+    handleOnRefresh = () => {
+        const { getTransactions, token, trackedDates } = this.props; 
+        getTransactions(token, trackedDates.month, trackedDates.year); 
+    }
     
     render() {
-        const { transactions, activeFilters } = this.props;
+        const { transactions, activeFilters, loading } = this.props;
 
         // Apply Filters
         let filteredTransactions = transactions; 
@@ -122,6 +127,8 @@ class TransactionsScreen extends Component {
         return (
             <Backdrop>
                 <TransactionTable 
+                    refreshing={loading}
+                    onRefresh={this.handleOnRefresh}
                     transactions={filteredTransactions}
                     onRowPressed={this.handleTransactionPressed} 
                     onFilterPressed={this.handleFilterPressed} />
@@ -139,7 +146,9 @@ const mapStateToProps = state => {
         currentUser: state.auth.currentUser,
         token: state.auth.token,
         transactions: state.transactions.transactions,
-        activeFilters: state.transactions.filters.activeFilters
+        activeFilters: state.transactions.filters.activeFilters, 
+        loading: state.transactions.loading,
+        trackedDates: state.transactions.trackedDates,
     };
 }; 
 

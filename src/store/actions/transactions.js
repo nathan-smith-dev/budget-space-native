@@ -14,6 +14,7 @@ export const getTransactions = token => {
                 for(let transaction of transactions.data) {
                     transactionsWithJSDate.push({...transaction, date: calcTimezoneOffset(new Date(transaction.date))}); 
                 }
+                dispatch(setTransactionsLoading(true)); 
                 dispatch(setTransactions(transactionsWithJSDate)); 
                 dispatch(getFilterCategories(token));
                 dispatch(getFilterDates(token));
@@ -129,5 +130,12 @@ export const setUserCategories = categories => {
     return {
         type: actionTypes.SET_USER_CATEGORIES, 
         categories: categories
+    };
+}; 
+
+export const setTransactionsLoading = loading => {
+    return {
+        type: actionTypes.SET_TRANSACTIONS_LOADING, 
+        loading: loading
     };
 }; 

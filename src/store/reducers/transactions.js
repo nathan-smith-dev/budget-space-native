@@ -15,7 +15,8 @@ const initialState = {
     trackedDates: {
         month: today.getMonth() + 1, 
         year: today.getFullYear()
-    }
+    }, 
+    loading: true
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_TRANSACTIONS: 
             return {
                 ...state, 
-                transactions: action.transactions
+                transactions: action.transactions, 
+                loading: false
             }; 
         case actionTypes.SET_TRACKED_DATES: 
             return {
@@ -58,6 +60,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 categories: action.categories
+            }; 
+        case actionTypes.SET_TRANSACTIONS_LOADING: 
+            return {
+                ...state, 
+                loading: action.loading
             }; 
         default: 
             return state; 

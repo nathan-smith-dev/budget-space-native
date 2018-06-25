@@ -1,2 +1,1 @@
-- add pull to refresh for transactions 
 - implement chart screen
