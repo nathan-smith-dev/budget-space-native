@@ -38,7 +38,6 @@ const percentTable = ({ categoryData, total, refreshing, onRefresh }) => {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 15, 
         flex: 1
     }
 }); 

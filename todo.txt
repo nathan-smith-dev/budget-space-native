@@ -1,2 +1,2 @@
-- implement chart screen
+- implement bar chart screen
 - install react native svg to iOS
