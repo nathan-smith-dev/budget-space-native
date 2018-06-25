@@ -177,10 +177,21 @@ class TransactionFormScreen extends Component {
             categoryId: categoryId.value
         }; 
         // console.log(transObj); 
-        const postedDate = await apiCalls.createTransaction(token, transObj); 
-        console.log(postedDate.data); 
-        getTransactions(token); 
-        navigator.pop({ animationType: 'fade' }); 
+        let tries = 0; 
+        while (tries < 5) {
+            try {
+                const postedDate = await apiCalls.createTransaction(token, transObj); 
+                console.log(postedDate.data); 
+                getTransactions(token); 
+                navigator.pop({ animationType: 'fade' }); 
+                return; 
+            }
+            catch(err) {
+                console.log(err); 
+                tries++; 
+            }
+        }
+        alert('Failed sending new transaction.'); 
     }
 
     updateTransaction = async () => {
@@ -197,15 +208,21 @@ class TransactionFormScreen extends Component {
             type: type
         }; 
 
-        try {
-            const postedDate = await apiCalls.updateTransaction(token, transObj); 
-            navigator.pop({ animationType: 'fade' }); 
-            navigator.pop({ animationType: 'fade' }); 
-            getTransactions(token); 
+        let tries = 0; 
+        while (tries < 5) {
+            try {
+                const postedDate = await apiCalls.updateTransaction(token, transObj); 
+                navigator.pop({ animationType: 'fade' }); 
+                navigator.pop({ animationType: 'fade' }); 
+                getTransactions(token); 
+                return; 
+            }
+            catch(err) {
+                console.log(err); 
+                tries++; 
+            }
         }
-        catch(err) {
-            console.log(err.message);
-        }
+        alert('Failed updating transaction.'); 
     }
 
     render() {

@@ -70,10 +70,21 @@ class TransactionsScreen extends Component {
     }
 
     handleDeleteTransaction = async (id, type) => {
-        const { token, navigator, getTransactions } = this.props; 
-        const deletedTransaction = await apiCalls.deleteTransaction(token, id, type); 
-        getTransactions(token); 
-        navigator.pop({ animationType: 'fade' }); 
+        let tries = 0; 
+        while (tries < 5) {
+            try {
+                const { token, navigator, getTransactions } = this.props; 
+                const deletedTransaction = await apiCalls.deleteTransaction(token, id, type); 
+                getTransactions(token); 
+                navigator.pop({ animationType: 'fade' });
+                return;  
+            }
+            catch(err) {
+                console.log(err); 
+                tries++; 
+            }
+        }
+        alert('Error deleting transaction.'); 
     }
     
     handleEditTransaction = (id) => {
