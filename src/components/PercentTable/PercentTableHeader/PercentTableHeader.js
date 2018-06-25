@@ -7,10 +7,10 @@ import { TableColumn, TableRow } from '../../Table';
 const percentTableHeader = (props) => {
     return (
         <TableRow>
-            <TableColumn grow={7}>
+            <TableColumn grow={6}>
                 <Text style={styles.headingText}>Category</Text>
             </TableColumn>
-            <TableColumn grow={3}>
+            <TableColumn grow={4}>
                 <Text style={[styles.headingText, {textAlign: 'right', paddingRight: 15}]}>Amount</Text>
             </TableColumn>
             <TableColumn grow={2}>

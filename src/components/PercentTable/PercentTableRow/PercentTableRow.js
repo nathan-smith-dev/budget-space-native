@@ -8,14 +8,14 @@ const percentTableRow = ({ amount, categoryName, percentage, labelColor }) => {
     return (
         <View>
             <TableRow>
-                <TableColumn grow={7}>
+                <TableColumn grow={6}>
                     <View style={styles.category}>
                         <View style={[styles.categoryLabel, {backgroundColor: labelColor}]}></View>
                         <Text>{categoryName}</Text>
                     </View>
                 </TableColumn>
-                <TableColumn grow={3}>
-                    <Text style={styles.amountText}>{`$${amount.toFixed(2)}`}</Text>
+                <TableColumn grow={4}>
+                    <Text style={styles.amountText}>{`${amount.toFixed(2)}`}</Text>
                 </TableColumn>
                 <TableColumn grow={2}>
                     <Text style={{textAlign: 'right'}}>{`${Math.round(percentage)}%`}</Text>
