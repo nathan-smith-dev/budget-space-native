@@ -1,7 +1,10 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'; 
 import { connect } from 'react-redux';
-import { PieChart } from 'react-native-svg-charts'; 
+import Backdrop from '../../hoc/Backdrop/Backdrop'; 
+import * as colors from '../../assets/styles/colors';
+import PercentOverview from '../../components/PercentOverview/PercentOverview'; 
+import * as transactionActions from '../../store/actions/transactions'; 
 
 class MonthlyOverviewScreen extends Component {
     constructor(props) {
@@ -20,81 +23,61 @@ class MonthlyOverviewScreen extends Component {
             }); 
         }
     }
+
+    handleOnRefresh = () => {
+        const { getCategorizedExpenses, token } = this.props;
+        getCategorizedExpenses(token); 
+    }
     
     render() {
+        const { categorizedExpenses, categorizedExpensesLoading } = this.props;
 
-        const data = [
-            {
-                key: 1,
-                value: 50,
-                svg: { fill: '#600080' },
-                arc: { outerRadius: '130%', cornerRadius: 10,  }
-            },
-            {
-                key: 2,
-                value: 50,
-                svg: { fill: '#9900cc' }
-            },
-            {
-                key: 3,
-                value: 40,
-                svg: { fill: '#c61aff' }
-            },
-            {
-                key: 4,
-                value: 95,
-                svg: { fill: '#d966ff' }
-            },
-            {
-                key: 5,
-                value: 35,
-                svg: { fill: '#ecb3ff' }
-            }
-        ]
+        let content = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" colors={colors.PRIMARY_COLOR} />
+            </View>
+        ); 
+        if(!categorizedExpensesLoading) {
+            content = (
+                <PercentOverview
+                    data={categorizedExpenses}
+                    onRefresh={this.handleOnRefresh}
+                    refreshing={categorizedExpensesLoading}
+                />
+            ); 
+        }
 
         return (
-            <View style={styles.backDrop}>
+            <Backdrop>
                 <View style={styles.container}>
-                    <View>
-                        <Text style={styles.title}>Monthly Overview Screen</Text>
-                        <PieChart
-                            style={{ height: 200 }}
-                            outerRadius={'70%'}
-                            innerRadius={10}
-                            data={data}
-                        />
-                    </View>
+                    {content}
                 </View>
-            </View>
-            );
+            </Backdrop>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    backDrop: {
-        flex: 1, 
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: '#cae2ee'
-    }, 
     container: {
-        backgroundColor: '#ffff', 
-        borderRadius: 5,
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'space-around'
-    }, 
-    title: {
-        color: 'white', 
-        fontSize: 26
+        padding: 15, 
+        flex: 1
     }
-})
+}); 
 
 const mapStateToProps = state => {
     return {
         currentUser: state.auth.currentUser,
+        token: state.auth.token,
+        categorizedExpenses: state.transactions.categorizedExpenses,
+        categorizedExpensesLoading: state.transactions.categorizedExpensesLoading,
+    };
+}; 
+
+mapDispatchToProps = dispatch => {
+    return {
+        getCategorizedExpenses: token => dispatch(transactionActions.getCategorizedExpenses(token))
     }
 }
 
-export default connect(mapStateToProps)(MonthlyOverviewScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(MonthlyOverviewScreen); 
 
