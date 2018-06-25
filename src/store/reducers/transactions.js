@@ -16,7 +16,8 @@ const initialState = {
         month: today.getMonth() + 1, 
         year: today.getFullYear()
     }, 
-    loading: true
+    loading: true, 
+    categorizedExpenses: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -65,6 +66,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 loading: action.loading
+            }; 
+        case actionTypes.SET_CATEGORIZED_EXPENSES: 
+            return {
+                ...state, 
+                categorizedExpenses: action.expenses
             }; 
         default: 
             return state; 

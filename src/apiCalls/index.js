@@ -64,3 +64,12 @@ export const addUser = (token, userObj) => {
     
     return instance.post(url, userObj, { headers: { 'x-auth-token': token } });
 };
+
+export const getCategorizedExpenses = (token, month, year) => {
+    let url = '/categories/totals'; 
+    if(month && year) {
+        url += `?month=${month}&year=${year}`
+    }
+
+    return instance.get(url, { headers: { 'x-auth-token': token } });
+}; 

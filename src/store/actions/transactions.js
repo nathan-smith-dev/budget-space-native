@@ -17,6 +17,7 @@ export const getTransactions = token => {
                 dispatch(setTransactionsLoading(true)); 
                 dispatch(setTransactions(transactionsWithJSDate)); 
                 dispatch(getFilterCategories(token));
+                dispatch(getCategorizedExpenses(token)); 
                 dispatch(getFilterDates(token));
                 return; 
             }
@@ -27,6 +28,27 @@ export const getTransactions = token => {
             }
         }
         alert('Error getting transactions');
+    }; 
+}; 
+
+export const getCategorizedExpenses = token => {
+    return async (dispatch, getState) => {
+        let tries = 0; 
+        while(tries < 5) { // Try call to api 5 times 
+            try {
+                const focusedDates = getState().transactions.trackedDates;
+                const expenses = await apiCalls.getCategorizedExpenses(token, focusedDates.month, focusedDates.year); 
+
+                dispatch(setCategorizedExpenses(expenses.data));
+                return; 
+            }
+            catch(err) {
+                // alert('Error getting transactions'); 
+                tries++; 
+                console.log(err); 
+            }
+        }
+        alert('Error getting categorized expenses.');
     }; 
 }; 
 
@@ -95,6 +117,13 @@ export const setTransactions = transactions => {
     return {
         type: actionTypes.SET_TRANSACTIONS, 
         transactions: transactions
+    }; 
+}; 
+
+export const setCategorizedExpenses = expenses => {
+    return {
+        type: actionTypes.SET_CATEGORIZED_EXPENSES, 
+        expenses: expenses
     }; 
 }; 
 
