@@ -4,6 +4,7 @@ import { store } from '../../App';
 
 import * as authActions from '../store/actions/auth'; 
 import * as transactionActions from '../store/actions/transactions'; 
+import * as apiCalls from '../apiCalls'; 
 
 export const configureGoogleSignin = () => {
     GoogleSignin.hasPlayServices({ autoResolve: true }); 
@@ -31,6 +32,7 @@ export const registerAuthListeners = () => {
                 const token = await currentUser.getIdToken(); 
                 store.dispatch(authActions.setAuthToken(token)); 
                 if(token) {
+                    addUserToDatabase(currentUser, token); 
                     store.dispatch(transactionActions.getTransactions(token)); 
                     store.dispatch(transactionActions.getUserCategories(token)); 
                 }
@@ -42,6 +44,28 @@ export const registerAuthListeners = () => {
     ); 
 
     return listeners; 
+}
+
+const addUserToDatabase = async (currentUser, token) => {
+    const userObj = {
+        id: currentUser.uid, 
+        email: currentUser.email, 
+        firstName: currentUser.displayName.split(' ')[0],
+        lastName: currentUser.displayName.split(' ')[1]
+    }; 
+
+    let tries = 0; 
+    while(tries < 5) {
+        try {
+            await apiCalls.addUser(token, userObj); 
+            return; 
+        }
+        catch(err) {
+            console.log(err); 
+            tries++; 
+        }
+    }
+    alert('Failed adding user to database.'); 
 }
 
 export const googleLogin = async () => {

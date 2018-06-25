@@ -57,4 +57,10 @@ export const updateTransaction = (token, transObj) => {
     console.log(transObj);
 
     return instance.put(url, transObj, { headers: { 'x-auth-token': token } })
-}
+}; 
+
+export const addUser = (token, userObj) => {
+    const url = `/users`; 
+    
+    return instance.post(url, userObj, { headers: { 'x-auth-token': token } });
+};
