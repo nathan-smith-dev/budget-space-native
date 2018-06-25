@@ -17,7 +17,8 @@ const initialState = {
         year: today.getFullYear()
     }, 
     loading: true, 
-    categorizedExpenses: []
+    categorizedExpenses: [], 
+    categorizedExpensesLoading: true
 }
 
 const reducer = (state = initialState, action) => {
@@ -67,10 +68,16 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 loading: action.loading
             }; 
+        case actionTypes.SET_CATEGORIZED_EXPENSES_LOADING: 
+            return {
+                ...state, 
+                categorizedExpensesLoading: action.loading
+            }; 
         case actionTypes.SET_CATEGORIZED_EXPENSES: 
             return {
                 ...state, 
-                categorizedExpenses: action.expenses
+                categorizedExpenses: action.expenses, 
+                categorizedExpensesLoading: false
             }; 
         default: 
             return state; 

@@ -8,13 +8,14 @@ export const getTransactions = token => {
         while(tries < 5) { // Try call to api 5 times 
             try {
                 const focusedDates = getState().transactions.trackedDates;
+                dispatch(setTransactionsLoading(true)); 
+                dispatch(setCategorizedExpensesLoading(true)); 
                 const transactions = await apiCalls.getTransactions(token, focusedDates.month, focusedDates.year); 
                 
                 let transactionsWithJSDate = []; // Date on server is a UTC string. Modify to be JS date in Redux
                 for(let transaction of transactions.data) {
                     transactionsWithJSDate.push({...transaction, date: calcTimezoneOffset(new Date(transaction.date))}); 
                 }
-                dispatch(setTransactionsLoading(true)); 
                 dispatch(setTransactions(transactionsWithJSDate)); 
                 dispatch(getFilterCategories(token));
                 dispatch(getCategorizedExpenses(token)); 
@@ -165,6 +166,13 @@ export const setUserCategories = categories => {
 export const setTransactionsLoading = loading => {
     return {
         type: actionTypes.SET_TRANSACTIONS_LOADING, 
+        loading: loading
+    };
+}; 
+
+export const setCategorizedExpensesLoading = loading => {
+    return {
+        type: actionTypes.SET_CATEGORIZED_EXPENSES_LOADING, 
         loading: loading
     };
 }; 
