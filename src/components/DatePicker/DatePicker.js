@@ -55,18 +55,20 @@ class DatePicker extends Component {
                     <View style={styles.modalContainer}>
                         <View>
                             <Text style={[styles.headerText, {fontSize: size}]}>Select Date</Text>
-                            <Calendar
-                                style={styles.calendarWrapper}
-                                barView={{backgroundColor: color, borderTopLeftRadius: 5, borderTopRightRadius: 5}}
-                                barText={[styles.calenderMonth, {color: textColor}]}
-                                dayHeaderView={{backgroundColor: dayHeaderColor}}
-                                stageView={{padding: 0}}
-                                daySelectedText={{color: color, borderWidth: 0, fontWeight: '800', fontSize: 18}}
-                                selected={selectedDate}
-                                onChange={this.handleOnDateChange}
-                                minDate={moment().subtract(2, 'months').startOf('day')}
-                                maxDate={moment().add(2, 'months').startOf('day')}
-                            />
+                            <View>
+                                <Calendar
+                                    style={styles.calendarWrapper}
+                                    barView={{backgroundColor: color, borderTopLeftRadius: 5, borderTopRightRadius: 5}}
+                                    barText={[styles.calenderMonth, {color: textColor}]}
+                                    dayHeaderView={{backgroundColor: dayHeaderColor}}
+                                    stageView={{padding: 0}}
+                                    daySelectedText={{color: color, borderWidth: 0, fontWeight: '800', fontSize: 18}}
+                                    selected={selectedDate}
+                                    onChange={this.handleOnDateChange}
+                                    minDate={moment().subtract(2, 'months').startOf('day')}
+                                    maxDate={moment().add(2, 'months').startOf('day')}
+                                />
+                            </View>
                         </View>
                     </View>
                 </Modal>
@@ -77,9 +79,9 @@ class DatePicker extends Component {
 
 const styles = StyleSheet.create({
     modalContainer: {
-        margin: 25, 
-        flex: 1, 
-        marginTop: 50
+        marginTop: 50, 
+        alignItems: 'center', 
+        justifyContent: 'space-between'
     }, 
     calendarWrapper: {
         borderRadius: 5, 
@@ -95,7 +97,6 @@ const styles = StyleSheet.create({
     }, 
     headerText: {
         color: colors.DARK_COLOR, 
-        textAlign: 'center', 
         marginBottom: 2
     }
 })
