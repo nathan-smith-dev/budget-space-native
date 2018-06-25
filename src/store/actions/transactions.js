@@ -20,6 +20,7 @@ export const getTransactions = token => {
                 dispatch(getFilterCategories(token));
                 dispatch(getCategorizedExpenses(token)); 
                 dispatch(getFilterDates(token));
+                dispatch(getTotalIncomesAndExpenses(token));
                 return; 
             }
             catch(err) {
@@ -114,11 +115,38 @@ export const getUserCategories = token => {
     }; 
 }; 
 
+export const getTotalIncomesAndExpenses = token => {
+    return async (dispatch, getState) => {
+        let tries = 0; 
+        while(tries < 5) {
+            try {
+                const focusedDates = getState().transactions.trackedDates;
+                const totals = await apiCalls.getTotalIncomesAndExpenses(token, focusedDates.month, focusedDates.year); 
+                dispatch(setTotalIncomesAndExpense(totals.data[0])); 
+                return; 
+            }
+            catch(err) {
+                // alert('Error getting category filter'); 
+                tries++; 
+                console.log(err); 
+            }
+        }
+        alert('Error getting total incomes and expenses.');
+    }; 
+}; 
+
 export const setTransactions = transactions => {
     return {
         type: actionTypes.SET_TRANSACTIONS, 
         transactions: transactions
     }; 
+}; 
+
+export const setTotalIncomesAndExpense = totals => {
+    return {
+        type: actionTypes.SET_TOTALS, 
+        totals: totals
+    };
 }; 
 
 export const setCategorizedExpenses = expenses => {

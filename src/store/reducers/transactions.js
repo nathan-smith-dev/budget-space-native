@@ -18,7 +18,11 @@ const initialState = {
     }, 
     loading: true, 
     categorizedExpenses: [], 
-    categorizedExpensesLoading: true
+    categorizedExpensesLoading: true, 
+    totals: {
+        incomes: 0, 
+        expenses: 0
+    }
 }
 
 const reducer = (state = initialState, action) => {
@@ -78,6 +82,11 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 categorizedExpenses: action.expenses, 
                 categorizedExpensesLoading: false
+            }; 
+        case actionTypes.SET_TOTALS: 
+            return {
+                ...state, 
+                totals: action.totals
             }; 
         default: 
             return state; 

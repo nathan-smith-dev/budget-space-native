@@ -4,7 +4,7 @@ import * as colors from '../../../assets/styles/colors';
 
 const tableRow = (props) => {
     return (
-        <View style={styles.container}>{props.children}</View>
+        <View style={[styles.container, {...props.style}]}>{props.children}</View>
     ); 
 }; 
 

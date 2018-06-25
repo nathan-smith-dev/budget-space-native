@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Backdrop from '../../hoc/Backdrop/Backdrop'; 
 import * as colors from '../../assets/styles/colors';
 import PercentOverview from '../../components/PercentOverview/PercentOverview'; 
+import BarOverview from '../../components/BarOverview/BarOverview'; 
 import * as transactionActions from '../../store/actions/transactions'; 
 
 class MonthlyOverviewScreen extends Component {
@@ -44,7 +45,7 @@ class MonthlyOverviewScreen extends Component {
     }
     
     render() {
-        const { categorizedExpenses, categorizedExpensesLoading } = this.props;
+        const { categorizedExpenses, categorizedExpensesLoading, totalIncomesAndExpense } = this.props;
         const { tab } = this.state; 
 
         let content = (
@@ -63,7 +64,9 @@ class MonthlyOverviewScreen extends Component {
         }
         else if(!categorizedExpensesLoading && tab === 'bar') {
             content = (
-                <Text>Bar</Text>
+                <BarOverview 
+                    data={totalIncomesAndExpense}
+                />
             ); 
         }
 
@@ -90,6 +93,7 @@ const mapStateToProps = state => {
         token: state.auth.token,
         categorizedExpenses: state.transactions.categorizedExpenses,
         categorizedExpensesLoading: state.transactions.categorizedExpensesLoading,
+        totalIncomesAndExpense: state.transactions.totals
     };
 }; 
 
