@@ -11,6 +11,7 @@ const startMainTabs = () => {
         Icon.getImageSource('ios-people', 40),
         Icon.getImageSource('md-menu', 40),
         Icon.getImageSource('md-add', 40),
+        Icon.getImageSource('ios-stats', 40),
     ])
     .then(sources => {
         Navigation.startTabBasedApp({
@@ -49,6 +50,18 @@ const startMainTabs = () => {
                                 icon: sources[4], 
                                 title: 'menu', 
                                 id:'sideDrawerToggle'
+                            }
+                        ], 
+                        rightButtons: [
+                            {
+                                icon: sources[6], 
+                                title: 'bar', 
+                                id: 'toggleBarChart'
+                            },
+                            {
+                                icon: sources[1], 
+                                title: 'pie', 
+                                id: 'togglePieChart'
                             }
                         ]
                     }

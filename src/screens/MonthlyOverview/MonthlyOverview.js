@@ -22,6 +22,20 @@ class MonthlyOverviewScreen extends Component {
                 side: 'left'
             }); 
         }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'toggleBarChart') {
+            this.setState({
+                tab: 'bar'
+            });
+        }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'togglePieChart') {
+            this.setState({
+                tab: 'pie'
+            });
+        }
+    }
+
+    state = {
+        tab: 'pie'
     }
 
     handleOnRefresh = () => {
@@ -31,19 +45,25 @@ class MonthlyOverviewScreen extends Component {
     
     render() {
         const { categorizedExpenses, categorizedExpensesLoading } = this.props;
+        const { tab } = this.state; 
 
         let content = (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <ActivityIndicator size="large" colors={colors.PRIMARY_COLOR} />
             </View>
         ); 
-        if(!categorizedExpensesLoading) {
+        if(!categorizedExpensesLoading && tab === 'pie') {
             content = (
                 <PercentOverview
                     data={categorizedExpenses}
                     onRefresh={this.handleOnRefresh}
                     refreshing={categorizedExpensesLoading}
                 />
+            ); 
+        }
+        else if(!categorizedExpensesLoading && tab === 'bar') {
+            content = (
+                <Text>Bar</Text>
             ); 
         }
 
