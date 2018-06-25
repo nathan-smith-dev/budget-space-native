@@ -15,7 +15,7 @@ const percentTableHeader = (props) => {
             </TableColumn>
             <TableColumn grow={2}>
                 <View>
-                    <Text style={[styles.headingText, {textAlign: 'right'}]}>Percent</Text>
+                    <Text style={[styles.headingText, {textAlign: 'right'}]}>%</Text>
                 </View>
             </TableColumn>
         </TableRow>
