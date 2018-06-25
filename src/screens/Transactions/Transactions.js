@@ -1,10 +1,11 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import Backdrop from '../../hoc/Backdrop/Backdrop' ; 
 import TransactionTable from '../../components/TransactionTable/TransactionTable'; 
 import { connect } from 'react-redux';
 import * as apiCalls from '../../apiCalls'; 
 import * as transactionActions from '../../store/actions/transactions'; 
+import * as colors from '../../assets/styles/colors'; 
 
 class TransactionsScreen extends Component {
     constructor(props) {
@@ -124,14 +125,25 @@ class TransactionsScreen extends Component {
                 ); 
             }
         }
-        return (
-            <Backdrop>
+
+        let content = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" colors={colors.PRIMARY_COLOR} />
+            </View>
+        );
+        if(!loading) {
+            content = (
                 <TransactionTable 
                     refreshing={loading}
                     onRefresh={this.handleOnRefresh}
                     transactions={filteredTransactions}
                     onRowPressed={this.handleTransactionPressed} 
                     onFilterPressed={this.handleFilterPressed} />
+            ); 
+        }
+        return (
+            <Backdrop>
+                {content}
             </Backdrop>
         );
     }
