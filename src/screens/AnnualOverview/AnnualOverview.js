@@ -7,7 +7,7 @@ import PercentOverview from '../../components/PercentOverview/PercentOverview';
 import BarOverview from '../../components/BarOverview/BarOverview'; 
 import * as annualTransactionActions from '../../store/actions/annualTransactions'; 
 
-class MonthlyOverviewScreen extends Component {
+class AnnualOverviewScreen extends Component {
     constructor(props) {
         super(props); 
 
@@ -103,5 +103,5 @@ mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonthlyOverviewScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(AnnualOverviewScreen); 
 

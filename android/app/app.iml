@@ -173,6 +173,7 @@
     <orderEntry type="module" module-name="react-native-navigation" />
     <orderEntry type="module" module-name="react-native-firebase" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-svg" />
     <orderEntry type="module" module-name="react-native-google-signin" />
   </component>
 </module>

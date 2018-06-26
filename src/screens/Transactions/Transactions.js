@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import * as apiCalls from '../../apiCalls'; 
 import * as transactionActions from '../../store/actions/transactions'; 
 import * as colors from '../../assets/styles/colors'; 
+export let rootNavigator = null; 
 
 class TransactionsScreen extends Component {
     constructor(props) {
         super(props); 
 
         const { navigator } = props; 
+        rootNavigator = navigator; 
         // console.log(navigator); 
         navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
     }
