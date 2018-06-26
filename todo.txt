@@ -1,2 +1,4 @@
 - escape ' for description 
 - Roommates feature
+- Delete user category
+- filter on side menu
