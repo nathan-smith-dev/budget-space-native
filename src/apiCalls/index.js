@@ -99,7 +99,7 @@ export const createUserCategory = (token, categoryName) => {
     return instance.post(`/categories`, { category: sqlEscapeSingleQuote(categoryName) }, { headers: { 'x-auth-token': token } }); 
 }; 
 
-const sqlEscapeSingleQuote = (escString) => {
+const sqlEscapeSingleQuote = (escString) => { // TODO: this should be done on the server instead. good enough for now
     if(escString) return escString.replace("'", "''"); 
     return ''; 
 }

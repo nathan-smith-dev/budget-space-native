@@ -31,7 +31,7 @@ class DatePicker extends Component {
     handleOnDateChange = date => {
         const { onChange } = this.props; 
         this.handleToggleModal(); 
-        onChange(date); 
+        onChange(date.startOf('day')); // remove time from date
     }
 
     render() {
