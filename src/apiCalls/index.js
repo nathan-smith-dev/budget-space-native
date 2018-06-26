@@ -85,12 +85,16 @@ export const getTotalIncomesAndExpenses = (token, month, year) => {
 
 export const getAnnualCategorizedExpenses = (token, year) => {
     return instance.get(`/categories/totals?annual=${year}`, { headers: { 'x-auth-token': token } }); 
-}
+};
 
 export const getAnnualTotalIncomeAndExpense = (token, year) => {
     return instance.get(`/expenses/totals?annual=${year}`, { headers: { 'x-auth-token': token } });
-}
+};
 
 export const deleteUserCategory = (token, id) => {
     return instance.delete(`/categories/${id}`, { headers: { 'x-auth-token': token } });
-}
+};
+
+export const createUserCategory = (token, categoryName) => {
+    return instance.post(`/categories`, { category: categoryName }, { headers: { 'x-auth-token': token } }); 
+}; 

@@ -4,7 +4,7 @@ import Backdrop from '../../hoc/Backdrop/Backdrop';
 import { connect } from 'react-redux'; 
 import Dropdown from '../../components/Dropdown/Dropdown'; 
 import DatePicker from '../../components/DatePicker/DatePicker'; 
-import ButtonIcon from '../../components/ButtonIcon/ButtonIcon'; 
+import NewCategory from '../../components/NewCategory/NewCategory'; 
 import * as colors from '../../assets/styles/colors'; 
 import NumericInput from '../../components/NumericInput/NumericInput'; 
 import TextInput from '../../components/TextInput/TextInput'; 
@@ -40,11 +40,6 @@ class TransactionFormScreen extends Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log(nextProps); 
-        console.log(prevState); 
-        // return {
-        //     ...prevState
-        // }
         if(nextProps.isNew) return {...prevState}; 
         
         else if(nextProps.isEdit) {
@@ -74,10 +69,6 @@ class TransactionFormScreen extends Component {
                 }
             }
         }
-    }
-
-    componentDidMount() {
-        console.log(this.state);
     }
 
     handleOnDateChange = date => {
@@ -165,6 +156,10 @@ class TransactionFormScreen extends Component {
         const { isNew, isEdit } = this.props;
         if(isNew) this.sendNewTransaction(); 
         else if(isEdit) this.updateTransaction(); 
+    }
+
+    handleOnNewCategory = () => {
+        alert('Hanlde new category'); 
     }
 
     sendNewTransaction = async () => {
@@ -282,12 +277,7 @@ class TransactionFormScreen extends Component {
                                                 size={14}
                                             />
                                         </View>
-                                        <ButtonIcon 
-                                            icon="md-add-circle"
-                                            size={30}
-                                            onPress={() => alert('Handle new csategory')}
-                                            color={colors.PRIMARY_COLOR} 
-                                        />
+                                        <NewCategory />
                                     </View>
                                 </View>
                                 <View style={styles.formContainer}>

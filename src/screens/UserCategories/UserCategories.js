@@ -5,16 +5,18 @@ import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
 import * as colors from '../../assets/styles/colors';
 import { connect } from 'react-redux';  
 import * as apiCalls from '../../apiCalls'; 
+import * as transactionActions from '../../store/actions/transactions'; 
 
 class UserCategoriesScreen extends Component {
 
     handleOnCategoryDelete = async id => {
-        const { token } = this.props; 
+        const { token, getUserCategories } = this.props; 
 
         let tries = 0; 
         while(tries < 5) {
             try {
                 await apiCalls.deleteUserCategory(token, id); 
+                getUserCategories(token); 
                 return; 
             }
             catch(err) {
@@ -40,7 +42,7 @@ class UserCategoriesScreen extends Component {
                                 <Text style={styles.listItemText}>{info.item.category}</Text>
                                 <View style={styles.buttonContainer}>
                                     <ButtonIcon 
-                                        onPress={() => handleOnCategoryDelete(info.item.id)}
+                                        onPress={() => this.handleOnCategoryDelete(info.item.id)}
                                         icon="ios-trash" 
                                         size={26} 
                                         color={colors.DANGER_COLOR} />
@@ -89,4 +91,10 @@ const mapStateToProps = state => {
     };
 }; 
 
-export default connect(mapStateToProps)(UserCategoriesScreen); 
+mapDispatchToProps = dispatch => {
+    return {
+        getUserCategories: token => dispatch(transactionActions.getUserCategories(token))
+    };
+}; 
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserCategoriesScreen); 
