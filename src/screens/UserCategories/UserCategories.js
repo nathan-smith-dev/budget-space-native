@@ -4,9 +4,26 @@ import Backdrop from '../../hoc/Backdrop/Backdrop';
 import ButtonIcon from '../../components/ButtonIcon/ButtonIcon'; 
 import * as colors from '../../assets/styles/colors';
 import { connect } from 'react-redux';  
+import * as apiCalls from '../../apiCalls'; 
 
 class UserCategoriesScreen extends Component {
 
+    handleOnCategoryDelete = async id => {
+        const { token } = this.props; 
+
+        let tries = 0; 
+        while(tries < 5) {
+            try {
+                await apiCalls.deleteUserCategory(token, id); 
+                return; 
+            }
+            catch(err) {
+                console.log(err); 
+                tries++
+            }
+        }
+        alert('Error deleting category.'); 
+    }
 
     render() {
         const { categories } = this.props; 
@@ -23,7 +40,7 @@ class UserCategoriesScreen extends Component {
                                 <Text style={styles.listItemText}>{info.item.category}</Text>
                                 <View style={styles.buttonContainer}>
                                     <ButtonIcon 
-                                        onPress={() => console.log(info.item.id)}
+                                        onPress={() => handleOnCategoryDelete(info.item.id)}
                                         icon="ios-trash" 
                                         size={26} 
                                         color={colors.DANGER_COLOR} />
@@ -52,7 +69,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between', 
         borderBottomWidth: 1, 
         borderBottomColor: colors.LIGHT_GREY_COLOR, 
-        marginBottom: 5
+        marginBottom: 5,
+        paddingTop: 5, 
+        paddingBottom: 5
     }, 
     listItemText: {
         fontSize: 16, 
@@ -65,6 +84,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
+        token: state.auth.token,
         categories: state.transactions.categories
     };
 }; 
