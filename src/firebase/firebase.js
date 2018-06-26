@@ -4,6 +4,7 @@ import { store } from '../../App';
 
 import * as authActions from '../store/actions/auth'; 
 import * as transactionActions from '../store/actions/transactions'; 
+import * as roommateActions from '../store/actions/roommates'; 
 import * as apiCalls from '../apiCalls'; 
 
 export const configureGoogleSignin = () => {
@@ -35,6 +36,8 @@ export const registerAuthListeners = () => {
                     addUserToDatabase(currentUser, token); 
                     store.dispatch(transactionActions.getTransactions(token)); 
                     store.dispatch(transactionActions.getUserCategories(token)); 
+                    store.dispatch(roommateActions.getRoommateRequests(token)); 
+                    store.dispatch(roommateActions.getRoommates(token)); 
                 }
             }
             else {

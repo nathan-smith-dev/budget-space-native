@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 
 import authReducer from './reducers/auth'; 
 import transactionsReducer from './reducers/transactions'; 
-import annualTransactionReducter from './reducers/annualTransactions'; 
+import annualTransactionReducer from './reducers/annualTransactions'; 
+import roommatesReducer from './reducers/roommates'; 
 
 const rootReducer = combineReducers({
     auth: authReducer, 
     transactions: transactionsReducer, 
-    annualTransactions: annualTransactionReducter
+    annualTransactions: annualTransactionReducer, 
+    roommates: roommatesReducer
 }); 
 
 let composeEnhancers = compose; 

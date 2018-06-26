@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://nsmith.site/api/',
-    timeout: 1000
+    timeout: 5000
 });
 
 export const getTransactions = (token, month = null, year = null) => {
@@ -99,7 +99,26 @@ export const createUserCategory = (token, categoryName) => {
     return instance.post(`/categories`, { category: sqlEscapeSingleQuote(categoryName) }, { headers: { 'x-auth-token': token } }); 
 }; 
 
+export const getRoommateRequests = token => {
+    return instance.get(`/roommates/requests`, { headers: { 'x-auth-token': token } }); 
+}; 
+
+export const getRoommates = token => {
+    return instance.get(`/roommates`, { headers: { 'x-auth-token': token } })
+}; 
+
+export const getRoommateIncomesAndExpenses = (token, roommatesArr) => {
+        const roommateIds = roommatesArr.map(r => r.id); 
+        let promises = []; 
+        for(let id of roommateIds) {
+            const url = `/roommates/expenses/user/${id}`;
+            console.log(url); 
+            promises.push(instance.get(url, { headers: { 'x-auth-token': token } })); 
+        }
+        return promises; 
+}
+
 const sqlEscapeSingleQuote = (escString) => { // TODO: this should be done on the server instead. good enough for now
     if(escString) return escString.replace("'", "''"); 
     return ''; 
-}
+};
