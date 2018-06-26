@@ -78,6 +78,18 @@ const startMainTabs = () => {
                                 title: 'menu', 
                                 id:'sideDrawerToggle'
                             }
+                        ], 
+                        rightButtons: [
+                            {
+                                icon: sources[6], 
+                                title: 'bar', 
+                                id: 'toggleBarChart'
+                            },
+                            {
+                                icon: sources[1], 
+                                title: 'pie', 
+                                id: 'togglePieChart'
+                            }
                         ]
                     }
                 },

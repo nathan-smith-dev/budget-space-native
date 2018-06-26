@@ -9,11 +9,11 @@ const barOverview = ({ data }) => {
     const formatedData = [
         {
             value: data.incomes,
-            svg: { fill: colors.SUCCESS_COLOR }
+            svg: { fill: colors.SUCCESS_COLOR_MEDIUM }
         },
         {
             value: data.expenses,
-            svg: { fill: colors.DANGER_COLOR }
+            svg: { fill: colors.DANGER_COLOR_MEDIUM }
         }
     ]; 
 

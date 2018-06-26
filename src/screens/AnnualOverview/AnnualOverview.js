@@ -1,8 +1,13 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'; 
 import { connect } from 'react-redux';
+import Backdrop from '../../hoc/Backdrop/Backdrop'; 
+import * as colors from '../../assets/styles/colors';
+import PercentOverview from '../../components/PercentOverview/PercentOverview'; 
+import BarOverview from '../../components/BarOverview/BarOverview'; 
+import * as annualTransactionActions from '../../store/actions/annualTransactions'; 
 
-class AnnualOverviewScreen extends Component {
+class MonthlyOverviewScreen extends Component {
     constructor(props) {
         super(props); 
 
@@ -18,46 +23,85 @@ class AnnualOverviewScreen extends Component {
                 side: 'left'
             }); 
         }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'toggleBarChart') {
+            this.setState({
+                tab: 'bar'
+            });
+        }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'togglePieChart') {
+            this.setState({
+                tab: 'pie'
+            });
+        }
+    }
+
+    state = {
+        tab: 'pie'
+    }
+
+    handleOnRefresh = () => {
+        const { getCategorizedExpenses, token } = this.props;
+        getCategorizedExpenses(token); 
     }
     
     render() {
-        return (
-            <View style={styles.backDrop}>
-                <View style={styles.container}>
-                    <View>
-                        <Text style={styles.title}>Annual Overview Screen</Text>
-                    </View>
-                </View>
+        const { categorizedExpenses, categorizedExpensesLoading, totalIncomesAndExpense } = this.props;
+        const { tab } = this.state; 
+
+        let content = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" colors={colors.PRIMARY_COLOR} />
             </View>
-            );
+        ); 
+        if(!categorizedExpensesLoading && tab === 'pie') {
+            content = (
+                <PercentOverview
+                    data={categorizedExpenses}
+                    onRefresh={this.handleOnRefresh}
+                    refreshing={categorizedExpensesLoading}
+                />
+            ); 
+        }
+        else if(!categorizedExpensesLoading && tab === 'bar') {
+            content = (
+                <BarOverview 
+                    data={totalIncomesAndExpense}
+                />
+            ); 
+        }
+
+        return (
+            <Backdrop>
+                <View style={styles.container}>
+                    {content}
+                </View>
+            </Backdrop>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    backDrop: {
-        flex: 1, 
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: '#cae2ee'
-    }, 
     container: {
-        backgroundColor: '#ffff', 
-        borderRadius: 5,
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'space-around'
-    }, 
-    title: {
-        color: 'white', 
-        fontSize: 26
+        padding: 15, 
+        flex: 1
     }
-})
+}); 
 
 const mapStateToProps = state => {
     return {
         currentUser: state.auth.currentUser,
+        token: state.auth.token,
+        categorizedExpenses: state.annualTransactions.categorizedExpenses,
+        categorizedExpensesLoading: state.annualTransactions.categorizedExpensesLoading,
+        totalIncomesAndExpense: state.annualTransactions.totals
+    };
+}; 
+
+mapDispatchToProps = dispatch => {
+    return {
+        getCategorizedExpenses: token => dispatch(annualTransactionActions.getCategorizedExpenses(token))
     }
 }
 
-export default connect(mapStateToProps)(AnnualOverviewScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(MonthlyOverviewScreen); 
 
