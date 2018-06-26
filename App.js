@@ -9,6 +9,7 @@ import SideDrawer from './src/screens/SideDrawer/SideDrawer';
 import TransactionDetailScreen from './src/screens/TransactionDetail/TransactionDetail'; 
 import FilterScreen from './src/screens/Filter/Filter'; 
 import TransactionFormScreen from './src/screens/TransactionForm/TransactionForm';
+import UserCategoriesScreen from './src/screens/UserCategories/UserCategories';
 
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore'; 
@@ -25,6 +26,7 @@ Navigation.registerComponent('budget-space-native.SideDrawer', () => SideDrawer,
 Navigation.registerComponent('budget-space-native.TransactionDetail', () => TransactionDetailScreen);
 Navigation.registerComponent('budget-space-native.FilterScreen', () => FilterScreen, store, Provider);
 Navigation.registerComponent('budget-space-native.TransactionFormScreen', () => TransactionFormScreen, store, Provider);
+Navigation.registerComponent('budget-space-native.UserCategoriesScreen', () => UserCategoriesScreen, store, Provider);
 
 // Start App
 startSinglePage(); 

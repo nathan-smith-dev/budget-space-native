@@ -30,6 +30,20 @@ class SideDrawer extends Component {
         }); 
     }
 
+    handleOnUserCategoriesScreen = () => {
+        Navigation.showModal({
+            screen: 'budget-space-native.UserCategoriesScreen', 
+            title: 'User Categories', 
+            passProps: {}, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+        const { navigator } = this.props; 
+        navigator.toggleDrawer({
+            side: 'left'
+        }); 
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -43,6 +57,12 @@ class SideDrawer extends Component {
                     <View style={styles.listItem}>
                         <Text style={styles.listText}>Filter Settings</Text>
                         <Icon name="ios-funnel-outline" size={30} color={colors.PRIMARY_COLOR} />
+                    </View>
+                </Touchable>
+                <Touchable onPress={this.handleOnUserCategoriesScreen}>
+                    <View style={styles.listItem}>
+                        <Text style={styles.listText}>Transaction Categories</Text>
+                        <Icon name="ios-folder-outline" size={30} color={colors.PRIMARY_COLOR} />
                     </View>
                 </Touchable>
             </View>
