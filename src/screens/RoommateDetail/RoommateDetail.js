@@ -28,20 +28,20 @@ class RoommateDetailScreen extends Component {
         return (
             <Backdrop>
                 <View style={styles.container}>
-                    <View style={styles.subcontainer}>
-                        <View style={{margin: 15, marginTop: 0, height: 50}}>
+                    <View style={{flex: 1, justifyContent: 'space-between'}}>
+                        <View style={{height: '65%'}}>
+                            <TransactionTable
+                                transactions={thisRoommatesTransactions}
+                                onRowPressed={id => console.log(id)}
+                            />
+                        </View>
+                        <View style={{height: '20%'}}>
                             <IncomeExpenseTable
                                 data={roommateIncomeExpenseObj} 
                                 oweTable
                                 incomeHeader="To"
                                 expenseHeader="From"
                                 netHeader={roommateIncomeExpenseObj.incomes > roommateIncomeExpenseObj.expenses ? "You are Owed" : "You Owe"}
-                            />
-                        </View>
-                        <View style={styles.subcontainer}>
-                            <TransactionTable
-                                transactions={thisRoommatesTransactions}
-                                onRowPressed={id => console.log(id)}
                             />
                         </View>
                     </View>
@@ -53,11 +53,14 @@ class RoommateDetailScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15, 
-        flex: 1
+        flex: 1, 
+        padding: 15
     }, 
     subcontainer: {
         flex: 1
+    },
+    chart: {
+        height: 50
     }
 }); 
 

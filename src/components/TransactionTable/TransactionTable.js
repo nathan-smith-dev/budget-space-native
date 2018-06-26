@@ -46,7 +46,7 @@ const transTable = ({ transactions, onRowPressed, onFilterPressed, refreshing, o
 
 const styles = StyleSheet.create({
     container: {
-        margin: 15
+        flex: 1
     }
 }); 
 
