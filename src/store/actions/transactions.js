@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import * as apiCalls from '../../apiCalls'; 
 import { calcTimezoneOffset } from '../../utilities';
+import * as annualTransactionActions from './annualTransactions'; 
 
 export const getTransactions = token => {
     return async (dispatch, getState) => {
@@ -10,6 +11,7 @@ export const getTransactions = token => {
                 const focusedDates = getState().transactions.trackedDates;
                 dispatch(setTransactionsLoading(true)); 
                 dispatch(setCategorizedExpensesLoading(true)); 
+                dispatch(annualTransactionActions.setCategorizedExpensesLoading(true)); 
                 const transactions = await apiCalls.getTransactions(token, focusedDates.month, focusedDates.year); 
                 
                 let transactionsWithJSDate = []; // Date on server is a UTC string. Modify to be JS date in Redux
@@ -19,8 +21,10 @@ export const getTransactions = token => {
                 dispatch(setTransactions(transactionsWithJSDate)); 
                 dispatch(getFilterCategories(token));
                 dispatch(getCategorizedExpenses(token)); 
+                dispatch(annualTransactionActions.getCategorizedExpenses(token)); 
                 dispatch(getFilterDates(token));
                 dispatch(getTotalIncomesAndExpenses(token));
+                dispatch(annualTransactionActions.getTotalIncomesAndExpenses(token));
                 return; 
             }
             catch(err) {

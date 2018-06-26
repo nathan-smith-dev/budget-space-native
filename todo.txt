@@ -1,2 +1,2 @@
-- implement bar chart screen
-- install react native svg to iOS
+- escape ' for description 
+- add annual screen

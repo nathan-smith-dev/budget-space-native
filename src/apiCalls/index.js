@@ -82,3 +82,11 @@ export const getTotalIncomesAndExpenses = (token, month, year) => {
 
     return instance.get(url, { headers: { 'x-auth-token': token } });
 }; 
+
+export const getAnnualCategorizedExpenses = (token, year) => {
+    return instance.get(`/categories/totals?annual=${year}`, { headers: { 'x-auth-token': token } }); 
+}
+
+export const getAnnualTotalIncomeAndExpense = (token, year) => {
+    return instance.get(`/expenses/totals?annual=${year}`, { headers: { 'x-auth-token': token } });
+}
