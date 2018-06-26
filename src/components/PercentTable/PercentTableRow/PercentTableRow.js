@@ -4,10 +4,10 @@ import { View, Text, StyleSheet } from 'react-native';
 import { TableColumn, TableRow } from '../../Table'; 
 
 
-const percentTableRow = ({ amount, categoryName, percentage, labelColor }) => {
+const percentTableRow = ({ amount, categoryName, percentage, labelColor, border }) => {
     return (
         <View>
-            <TableRow>
+            <TableRow style={!border ? {borderBottomWidth: 0} : null}>
                 <TableColumn grow={6}>
                     <View style={styles.category}>
                         <View style={[styles.categoryLabel, {backgroundColor: labelColor}]}></View>
@@ -48,7 +48,8 @@ percentTableRow.propTypes = {
     amount: PropTypes.number.isRequired, 
     categoryName: PropTypes.string.isRequired, 
     percentage: PropTypes.number.isRequired, 
-    labelColor: PropTypes.string.isRequired
+    labelColor: PropTypes.string.isRequired,
+    border: PropTypes.bool
 }
 
 export default percentTableRow; 

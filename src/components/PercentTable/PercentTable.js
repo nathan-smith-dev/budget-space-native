@@ -16,6 +16,7 @@ const percentTable = ({ categoryData, total, refreshing, onRefresh }) => {
                     data={categoryData}
                     renderItem={info => (
                         <PercentTableRow 
+                            border={info.index !== categoryData.length-1}
                             amount={info.item.total}
                             categoryName={info.item.category}
                             percentage={(info.item.total / total)*100} 
