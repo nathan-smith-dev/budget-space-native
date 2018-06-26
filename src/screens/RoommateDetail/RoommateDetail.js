@@ -13,6 +13,31 @@ class RoommateDetailScreen extends Component {
         roommateId: PropTypes.string.isRequired
     }
 
+    handleOnExpenseSelected = id => {
+        const { mateTransactions, roommateId, navigator } = this.props; 
+        const transaction = mateTransactions[roommateId].filter(trans => trans.id === id)[0]; 
+        navigator.push({
+            screen: 'budget-space-native.TransactionDetail', 
+            title: 'Roommate Transaction', 
+            passProps: {
+                ...transaction, 
+                editable: transaction.direction === 'To', 
+                onDelete: this.handleDeleteTransaction, 
+                onEdit: this.handleEditTransaction
+            }, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+    }
+
+    handleDeleteTransaction = id => {
+        console.log(id); 
+    }
+
+    handleEditTransaction = id => {
+        console.log(id); 
+    }
+
     render() {
         const { mateTransactions, roommateId } = this.props; 
         const thisRoommatesTransactions = mateTransactions[roommateId] ? mateTransactions[roommateId] : []; 
@@ -32,7 +57,7 @@ class RoommateDetailScreen extends Component {
                         <View style={{height: '65%'}}>
                             <TransactionTable
                                 transactions={thisRoommatesTransactions}
-                                onRowPressed={id => console.log(id)}
+                                onRowPressed={this.handleOnExpenseSelected}
                             />
                         </View>
                         <View style={{height: '20%'}}>

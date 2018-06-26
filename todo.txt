@@ -1,3 +1,11 @@
-- Roommates feature
+- Roommates expenses
+    - Create 
+    - Update
+    - Delete
+
+- Roommate features
+    - Roommate notifications
+    - Add roommate
+    - Remove roommate
+    
 - Add splash screen
-- Remove border width on last item in all flat lists 
