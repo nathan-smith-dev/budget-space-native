@@ -42,7 +42,7 @@ export const getUserCategories = (token) => {
 export const createTransaction = (token, transObj) => {
     const url = transObj.type === 'income' ? `/incomes` : `/expenses`; 
     
-    return instance.post(url, transObj, { headers: { 'x-auth-token': token } }); 
+    return instance.post(url, {...transObj, desc: sqlEscapeSingleQuote(transObj.desc)}, { headers: { 'x-auth-token': token } }); 
 }; 
 
 export const deleteTransaction = (token, id, type) => {
@@ -54,7 +54,7 @@ export const deleteTransaction = (token, id, type) => {
 export const updateTransaction = (token, transObj) => {
     const { id, type } = transObj; 
     const url = type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
-    console.log(transObj);
+    console.log({...transObj, desc: sqlEscapeSingleQuote(transObj.desc)});
 
     return instance.put(url, transObj, { headers: { 'x-auth-token': token } })
 }; 
@@ -96,5 +96,10 @@ export const deleteUserCategory = (token, id) => {
 };
 
 export const createUserCategory = (token, categoryName) => {
-    return instance.post(`/categories`, { category: categoryName }, { headers: { 'x-auth-token': token } }); 
+    return instance.post(`/categories`, { category: sqlEscapeSingleQuote(categoryName) }, { headers: { 'x-auth-token': token } }); 
 }; 
+
+const sqlEscapeSingleQuote = (escString) => {
+    if(escString) return escString.replace("'", "''"); 
+    return ''; 
+}
