@@ -5,8 +5,13 @@ import { TableColumn, TableRow } from '../../Table';
 import * as colors from '../../../assets/styles/colors';
 
 
-const incomeExpenseRow = ({ data, style }) => {
+const incomeExpenseRow = ({ data, style, oweTable }) => {
     const net = (data.incomes - data.expenses); 
+
+    let content = <Text style={{color: net >= 0 ? colors.SUCCESS_COLOR : colors.DANGER_COLOR}}>{`$${net.toFixed(2)}`}</Text>; 
+    if(oweTable) {
+        content = <Text style={{color: net >= 0 ? colors.SUCCESS_COLOR : colors.DANGER_COLOR}}>{`$${Math.abs(net.toFixed(2))}`}</Text>;
+    }
 
     return (
         <View>
@@ -18,7 +23,7 @@ const incomeExpenseRow = ({ data, style }) => {
                     <Text style={{color: colors.DANGER_COLOR}}>{`$${data.expenses.toFixed(2)}`}</Text>
                 </TableColumn>
                 <TableColumn grow={1}>
-                    <Text style={{color: net >= 0 ? colors.SUCCESS_COLOR : colors.DANGER_COLOR}}>{`$${net.toFixed(2)}`}</Text>
+                    {content}
                 </TableColumn>
             </TableRow>
         </View>
@@ -31,7 +36,8 @@ const styles = StyleSheet.create({
 
 incomeExpenseRow.propTypes = {
     data: PropTypes.object.isRequired, 
-    style: PropTypes.object
+    style: PropTypes.object,
+    oweTable: PropTypes.bool
 }
 
 export default incomeExpenseRow; 

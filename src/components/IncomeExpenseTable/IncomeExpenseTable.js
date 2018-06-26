@@ -5,7 +5,7 @@ import { Table } from '../Table';
 import IncomeExpenseTableHeader from './IncomeExpenseTableHeader/IncomeExpenseTableHeader'; 
 import IncomeExpenseRow from './IncomeExpenseTableRow/IncomeExpenseTableRow'; 
 
-const incomeExpenseTable = ({ data, incomeHeader, expenseHeader, netHeader }) => {
+const incomeExpenseTable = ({ data, incomeHeader, expenseHeader, netHeader, oweTable }) => {
     return (
         <View style={styles.container}>
             <Table>
@@ -14,7 +14,7 @@ const incomeExpenseTable = ({ data, incomeHeader, expenseHeader, netHeader }) =>
                     expenseHeader={expenseHeader}
                     netHeader={netHeader}
                 />
-                <IncomeExpenseRow style={{borderBottomWidth: 0}} data={data} />
+                <IncomeExpenseRow style={{borderBottomWidth: 0}} data={data} oweTable={oweTable} />
             </Table>
         </View>
     ); 
@@ -30,7 +30,8 @@ incomeExpenseTable.propTypes = {
     data: PropTypes.object.isRequired, 
     incomeHeader: PropTypes.string.isRequired,
     expenseHeader: PropTypes.string.isRequired,
-    netHeader: PropTypes.string.isRequired
+    netHeader: PropTypes.string.isRequired,
+    oweTable: PropTypes.bool
 }; 
 
 export default incomeExpenseTable; 

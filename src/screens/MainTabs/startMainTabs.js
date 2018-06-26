@@ -105,6 +105,14 @@ const startMainTabs = () => {
                                 title: 'menu', 
                                 id:'sideDrawerToggle'
                             }
+                        ], 
+                        rightButtons: [
+                            {
+                                icon: sources[5], 
+                                title: 'add roommate', 
+                                id: 'addRoommateToggle', 
+                                buttonFontWeight: '800'
+                            }
                         ]
                     }
                 },

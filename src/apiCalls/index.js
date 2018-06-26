@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://nsmith.site/api/',
-    timeout: 5000
+    timeout: 1000
 });
 
 export const getTransactions = (token, month = null, year = null) => {
@@ -112,7 +112,6 @@ export const getRoommateIncomesAndExpenses = (token, roommatesArr) => {
         let promises = []; 
         for(let id of roommateIds) {
             const url = `/roommates/expenses/user/${id}`;
-            console.log(url); 
             promises.push(instance.get(url, { headers: { 'x-auth-token': token } })); 
         }
         return promises; 

@@ -1,2 +1,3 @@
 - Roommates feature
 - Add splash screen
+- Remove border width on last item in all flat lists 

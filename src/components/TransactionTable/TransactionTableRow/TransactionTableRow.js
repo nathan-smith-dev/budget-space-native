@@ -7,16 +7,16 @@ import Touchable from '../../../hoc/Touchable/Touchable';
 import { formatDate } from '../../../utilities';
 
 
-const transTableRow = ({ date, amount, type, categoryName, onPress }) => {
+const transTableRow = ({ date, amount, type, categoryName, onPress, direction, border }) => {
     return (
         <Touchable onPress={onPress}>
             <View>
-                <TableRow>
+                <TableRow style={!border ? {borderBottomWidth: 0} : null}>
                     <TableColumn grow={2}>
                         <Text>{formatDate(date)}</Text>
                     </TableColumn>
                     <TableColumn grow={3}>
-                        <Text style={[styles.amountText, {color: type === 'Expense' ? colors.DANGER_COLOR : colors.SUCCESS_COLOR}]}>{amount.toFixed(2)}</Text>
+                        <Text style={[styles.amountText, {color: getTransactionColor(type, direction)}]}>{amount.toFixed(2)}</Text>
                     </TableColumn>
                     <TableColumn grow={7}>
                         <Text style={{marginLeft: 15}}>{categoryName}</Text>
@@ -26,6 +26,15 @@ const transTableRow = ({ date, amount, type, categoryName, onPress }) => {
         </Touchable>
     ); 
 }
+
+const getTransactionColor = (type, direction) => {
+    if(direction) {
+        return direction === 'From' ? colors.DANGER_COLOR : colors.SUCCESS_COLOR
+    }
+    else {
+        return type === 'Expense' ? colors.DANGER_COLOR : colors.SUCCESS_COLOR; 
+    }
+}; 
 
 const styles = StyleSheet.create({
     container: {
@@ -41,7 +50,9 @@ transTableRow.propTypes = {
     date: PropTypes.instanceOf(Date).isRequired, 
     amount: PropTypes.number.isRequired, 
     type: PropTypes.string.isRequired, 
-    categoryName: PropTypes.string.isRequired
+    categoryName: PropTypes.string.isRequired,
+    direction: PropTypes.string, 
+    border: PropTypes.bool.isRequired
 }
 
 export default transTableRow; 

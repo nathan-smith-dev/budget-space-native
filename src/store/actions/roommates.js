@@ -51,7 +51,6 @@ export const getRoommateIncomesAndExpenses = (token, roommates) => {
         while(tries < 5) {
             try {
                 const results = await Promise.all(apiCalls.getRoommateIncomesAndExpenses(token, roommates)); 
-                console.log('RESULTS', results); 
                 let data = {}; 
                 results.map(incomesAndExpenses => {
                     if(incomesAndExpenses.data && incomesAndExpenses.data.length > 0) {

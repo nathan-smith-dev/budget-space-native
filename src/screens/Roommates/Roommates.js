@@ -1,6 +1,9 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet } from 'react-native'; 
+import { View, Text, StyleSheet, FlatList } from 'react-native'; 
 import { connect } from 'react-redux';
+import Backdrop from '../../hoc/Backdrop/Backdrop'; 
+import Touchable from '../../hoc/Touchable/Touchable'; 
+import * as colors from '../../assets/styles/colors';
 
 class RoommatesScreen extends Component {
     constructor(props) {
@@ -18,44 +21,80 @@ class RoommatesScreen extends Component {
                 side: 'left'
             }); 
         }
+        else if(event.type === 'NavBarButtonPress' && event.id === 'addRoommateToggle') {
+            
+        }
+    }
+
+    handleRoommateClicked = uid => {
+        const { navigator } = this.props; 
+        navigator.push({
+            screen: 'budget-space-native.RoommateDetailScreen', 
+            title: 'Roommate Expenses', 
+            passProps: { roommateId: uid }, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
     }
     
     render() {
+        const { roommates } = this.props;
+
         return (
-            <View style={styles.backDrop}>
+            <Backdrop>
                 <View style={styles.container}>
-                    <View>
-                        <Text style={styles.title}>Roommates Screen</Text>
-                    </View>
+                    <Text style={styles.headingText}>Roommates</Text>
+                    <FlatList 
+                        keyExtractor={item => item.id}
+                        data={roommates}
+                        renderItem={info => (
+                            <Touchable onPress={() => this.handleRoommateClicked(info.item.id)}>
+                                <View style={[styles.listItem, info.index !== roommates.length-1 ? styles.listItemBorder : null]}>
+                                    <Text style={styles.listItemText}>{`${info.item.firstName} ${info.item.lastName}`}</Text>
+                                </View>
+                            </Touchable>
+                        )}
+                    />
                 </View>
-            </View>
-            );
+            </Backdrop>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    backDrop: {
-        flex: 1, 
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: '#cae2ee'
-    }, 
     container: {
-        backgroundColor: '#ffff', 
-        borderRadius: 5,
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'space-around'
+        padding: 15, 
+        marginBottom: 15
     }, 
-    title: {
-        color: 'white', 
-        fontSize: 26
+    headingText: {
+        fontSize: 14, 
+        color: colors.DARK_COLOR, 
+        marginBottom: 10, 
+    }, 
+    listItem: {
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginBottom: 5,
+        paddingTop: 5, 
+        paddingBottom: 5
+    }, 
+    listItemBorder: {
+        borderBottomWidth: 1, 
+        borderBottomColor: colors.LIGHT_GREY_COLOR, 
+    }, 
+    listItemText: {
+        fontSize: 16, 
+        marginBottom: 2
+    }, 
+    buttonContainer: {
+
     }
-})
+}); 
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.auth.currentUser,
+        token: state.auth.token,
+        roommates: state.roommates.mates
     }
 }
 

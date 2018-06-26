@@ -7,6 +7,17 @@ import TransactionTableHeader from './TransactionTableHeader/TransactionTableHea
 import TransactionTableRow from './TransactionTableRow/TransactionTableRow'; 
 
 const transTable = ({ transactions, onRowPressed, onFilterPressed, refreshing, onRefresh }) => {
+    let refreshControl = null; 
+    if(onRefresh) {
+        refreshControl = (
+            <RefreshControl 
+                colors={[colors.PRIMARY_COLOR]} 
+                tintColor={colors.PRIMARY_COLOR} 
+                refreshing={refreshing}
+                onRefresh={onRefresh} />
+        ); 
+    }
+
     return (
         <View style={styles.container}>
             <Table>
@@ -16,20 +27,16 @@ const transTable = ({ transactions, onRowPressed, onFilterPressed, refreshing, o
                     data={transactions}
                     renderItem={info => (
                         <TransactionTableRow 
+                            border={info.index !== transactions.length-1}
                             date={info.item.date}
                             amount={info.item.amount}
                             type={info.item.type}
+                            direction={info.item.direction}
                             categoryName={info.item.category}
                             onPress={() => onRowPressed(info.item.id)} 
                         />
                     )}
-                    refreshControl={
-                        <RefreshControl 
-                            colors={[colors.PRIMARY_COLOR]} 
-                            tintColor={colors.PRIMARY_COLOR} 
-                            refreshing={refreshing}
-                            onRefresh={onRefresh} />
-                    }
+                    refreshControl={refreshControl}
                 />
                 
             </Table>
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
 transTable.propTypes = {
     transactions: PropTypes.array.isRequired, 
     onRowPressed: PropTypes.func.isRequired,
-    onFilterPressed: PropTypes.func.isRequired,
+    onFilterPressed: PropTypes.func,
     refreshing: PropTypes.bool, 
     onRefresh: PropTypes.func
 }; 

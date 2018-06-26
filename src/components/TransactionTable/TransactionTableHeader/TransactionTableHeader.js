@@ -6,6 +6,17 @@ import { TableColumn, TableRow } from '../../Table';
 import ButtonIcon from '../../ButtonIcon/ButtonIcon'; 
 
 const transTableHeader = ({ onFilterPressed }) => {
+    let filter = null; 
+    if(onFilterPressed) {
+        filter = (
+            <ButtonIcon 
+                icon="ios-funnel" 
+                color={colors.PRIMARY_COLOR} 
+                size={20}
+                onPress={onFilterPressed} />
+        ); 
+    }
+
     return (
         <TableRow>
             <TableColumn grow={2}>
@@ -17,11 +28,7 @@ const transTableHeader = ({ onFilterPressed }) => {
             <TableColumn grow={7}>
                 <View style={styles.filterContainer}>
                     <Text style={[styles.headingText, {marginLeft: 15}]}>Category</Text>
-                    <ButtonIcon 
-                        icon="ios-funnel" 
-                        color={colors.PRIMARY_COLOR} 
-                        size={20}
-                        onPress={onFilterPressed} />
+                    {filter}
                 </View>
             </TableColumn>
         </TableRow>
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
 });
 
 transTableHeader.propTypes = {
-    onFilterPressed: PropTypes.func.isRequired
+    onFilterPressed: PropTypes.func
 }; 
 
 export default transTableHeader; 
