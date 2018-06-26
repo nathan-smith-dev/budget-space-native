@@ -33,7 +33,7 @@ class SideDrawer extends Component {
     handleOnUserCategoriesScreen = () => {
         Navigation.showModal({
             screen: 'budget-space-native.UserCategoriesScreen', 
-            title: 'User Categories', 
+            title: 'Edit Categories', 
             passProps: {}, 
             animated: true, 
             animationType: 'fade'
@@ -61,8 +61,8 @@ class SideDrawer extends Component {
                 </Touchable>
                 <Touchable onPress={this.handleOnUserCategoriesScreen}>
                     <View style={styles.listItem}>
-                        <Text style={styles.listText}>Transaction Categories</Text>
-                        <Icon name="ios-folder-outline" size={30} color={colors.PRIMARY_COLOR} />
+                        <Text style={styles.listText}>Edit Categories</Text>
+                        <Icon name="ios-settings-outline" size={30} color={colors.PRIMARY_COLOR} />
                     </View>
                 </Touchable>
             </View>
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     }, 
     listText: {
         color: colors.PRIMARY_COLOR, 
-        fontSize: 16
+        fontSize: 16, 
+        paddingRight: 20
     }, 
     listItem: {
         borderBottomWidth: 1, 
