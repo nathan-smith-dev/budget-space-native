@@ -12,6 +12,7 @@ import TransactionFormScreen from './src/screens/TransactionForm/TransactionForm
 import UserCategoriesScreen from './src/screens/UserCategories/UserCategories';
 import RoommateDetailScreen from './src/screens/RoommateDetail/RoommateDetail';
 import AddRoommateScreen from './src/screens/AddRoommate/AddRoommate';
+import UserRoommatesScreen from './src/screens/UserRoommates/UserRoommates';
 
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore'; 
@@ -31,6 +32,7 @@ Navigation.registerComponent('budget-space-native.TransactionFormScreen', () => 
 Navigation.registerComponent('budget-space-native.UserCategoriesScreen', () => UserCategoriesScreen, store, Provider);
 Navigation.registerComponent('budget-space-native.RoommateDetailScreen', () => RoommateDetailScreen, store, Provider);
 Navigation.registerComponent('budget-space-native.AddRoommateScreen', () => AddRoommateScreen, store, Provider);
+Navigation.registerComponent('budget-space-native.UserRoommatesScreen', () => UserRoommatesScreen, store, Provider);
 
 // Start App
 startSinglePage(); 

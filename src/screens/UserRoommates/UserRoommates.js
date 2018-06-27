@@ -5,10 +5,10 @@ import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
 import * as colors from '../../assets/styles/colors';
 import { connect } from 'react-redux';  
 import * as apiCalls from '../../apiCalls'; 
-import * as transactionActions from '../../store/actions/transactions'; 
+import * as roommateActions from '../../store/actions/roommates';
 import { Navigation } from 'react-native-navigation';
 
-class UserCategoriesScreen extends Component {
+class UserRoommatesScreen extends Component {
     constructor(props) {
         super(props); 
 
@@ -25,40 +25,28 @@ class UserCategoriesScreen extends Component {
         }
     }
 
-    handleOnCategoryDelete = async id => {
-        const { token, getUserCategories } = this.props; 
+    handleOnRoommateDelete = async id => {
+        const { token, getRoommates } = this.props; 
 
-        let tries = 0; 
-        while(tries < 5) {
-            try {
-                await apiCalls.deleteUserCategory(token, id); 
-                getUserCategories(token); 
-                return; 
-            }
-            catch(err) {
-                console.log(err); 
-                tries++
-            }
-        }
-        alert('Error deleting category.'); 
+        console.log('Delete '+id); 
     }
 
     render() {
-        const { categories } = this.props; 
+        const { mates } = this.props; 
 
         return (
             <Backdrop>
                 <View style={styles.container}>
-                    <Text style={styles.headingText}>Categories</Text>
+                    <Text style={styles.headingText}>Roommates</Text>
                     <FlatList 
                         keyExtractor={item => item.id}
-                        data={categories}
+                        data={mates}
                         renderItem={info => (
                             <View style={styles.listItem}>
-                                <Text style={styles.listItemText}>{info.item.category}</Text>
+                                <Text style={styles.listItemText}>{`${info.item.firstName} ${info.item.lastName}`}</Text>
                                 <View style={styles.buttonContainer}>
                                     <ButtonIcon 
-                                        onPress={() => this.handleOnCategoryDelete(info.item.id)}
+                                        onPress={() => this.handleOnRoommateDelete(info.item.id)}
                                         icon="ios-trash" 
                                         size={26} 
                                         color={colors.DANGER_COLOR} />
@@ -103,14 +91,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        categories: state.transactions.categories
+        mates: state.roommates.mates
     };
 }; 
 
 mapDispatchToProps = dispatch => {
     return {
-        getUserCategories: token => dispatch(transactionActions.getUserCategories(token))
+        getRoommates: token => dispatch(roommateActions.getRoommates(token))
     };
 }; 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCategoriesScreen); 
+export default connect(mapStateToProps, mapDispatchToProps)(UserRoommatesScreen); 

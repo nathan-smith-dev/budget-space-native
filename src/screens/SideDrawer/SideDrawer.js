@@ -31,17 +31,55 @@ class SideDrawer extends Component {
     }
 
     handleOnUserCategoriesScreen = () => {
-        Navigation.showModal({
-            screen: 'budget-space-native.UserCategoriesScreen', 
-            title: 'Edit Categories', 
-            passProps: {}, 
-            animated: true, 
-            animationType: 'fade'
-        }); 
-        const { navigator } = this.props; 
-        navigator.toggleDrawer({
-            side: 'left'
-        }); 
+        Icon.getImageSource("ios-arrow-back", 30)
+            .then(source => {
+                Navigation.showModal({
+                    screen: 'budget-space-native.UserCategoriesScreen', 
+                    title: 'Edit Categories', 
+                    passProps: {}, 
+                    animated: true, 
+                    animationType: 'fade', 
+                    navigatorButtons: {
+                        leftButtons: [
+                            {
+                                icon: source, 
+                                title: 'back', 
+                                id: 'goBack'
+                            }
+                        ]
+                    }
+                }); 
+                const { navigator } = this.props; 
+                navigator.toggleDrawer({
+                    side: 'left'
+                }); 
+            }); 
+    }
+    
+    handleOnUserRoommatesScreen = () => {
+        Icon.getImageSource('ios-arrow-back', 30)
+            .then(source=> {
+                Navigation.showModal({
+                    screen: 'budget-space-native.UserRoommatesScreen', 
+                    title: 'Edit Roommates', 
+                    passProps: {}, 
+                    animated: true, 
+                    animationType: 'fade', 
+                    navigatorButtons: {
+                        leftButtons: [
+                            {
+                                icon: source, 
+                                title: 'back', 
+                                id: 'goBack'
+                            }
+                        ]
+                    }
+                }); 
+                const { navigator } = this.props; 
+                navigator.toggleDrawer({
+                    side: 'left'
+                }); 
+            });
     }
 
     render() {
@@ -63,6 +101,12 @@ class SideDrawer extends Component {
                     <View style={styles.listItem}>
                         <Text style={styles.listText}>Edit Categories</Text>
                         <Icon name="ios-settings-outline" size={30} color={colors.PRIMARY_COLOR} />
+                    </View>
+                </Touchable>
+                <Touchable onPress={this.handleOnUserRoommatesScreen}>
+                    <View style={styles.listItem}>
+                        <Text style={styles.listText}>Edit Roomates</Text>
+                        <Icon name="ios-people-outline" size={30} color={colors.PRIMARY_COLOR} />
                     </View>
                 </Touchable>
             </View>

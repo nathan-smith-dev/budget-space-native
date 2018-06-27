@@ -54,12 +54,13 @@ class AddRoommateScreen extends Component {
     }
 
     handleSendRoomateRequest = async uid => {
-        const { token } = this.props; 
+        const { token, navigator } = this.props; 
         let tries = 0; 
             while (tries < 5) {
                 try {
                     const request = await apiCalls.createRoommateRequests(token, uid); 
                     console.log(request.data); 
+                    navigator.pop(); 
                     return; 
                 }
                 catch(err) {
