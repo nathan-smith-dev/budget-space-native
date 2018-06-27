@@ -125,6 +125,10 @@ export const updateRoommateExpense = (token, expenseObj) => {
     return instance.put(`/roommates/expenses/${expenseObj.id}`, expenseObj, { headers: { 'x-auth-token': token } })
 }; 
 
+export const getRoommateNotifications = token => {
+    return instance.get(`/roommates/expenses/notifications`, { headers: { 'x-auth-token': token } }); 
+}; 
+
 const sqlEscapeSingleQuote = (escString) => { // TODO: this should be done on the server instead. good enough for now
     if(escString) return escString.replace("'", "''"); 
     return ''; 

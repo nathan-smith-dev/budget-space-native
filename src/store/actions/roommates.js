@@ -34,6 +34,12 @@ export const getRoommates = token => {
                 const roommates = await apiCalls.getRoommates(token);
                 dispatch(setRoommates(roommates.data)); 
                 dispatch(getRoommateIncomesAndExpenses(token, roommates.data));  
+
+                const notifications = await apiCalls.getRoommateNotifications(token); 
+                let data = {}; 
+                for(let notification of notifications.data)
+                    data[notification.roomateId] = notification.notifications;             
+                dispatch(setRoommateNotifications(data)); 
                 return; 
             }
             catch(err) {
@@ -84,12 +90,12 @@ export const setRoommatesTransactions = (trans) => {
     }; 
 }; 
 
-// export const updateRoommateNotifications = (notifications) => {
-//     return {
-//         type: actionTypes.SET_ROOMMATE_NOTIFICATIONS, 
-//         notifications: notifications
-//     }; 
-// }
+export const setRoommateNotifications = (notifications) => {
+    return {
+        type: actionTypes.SET_ROOMMATE_NOTIFICATIONS, 
+        notifications: notifications
+    }; 
+}
 
 // export const setFocusedRoomateSuccess = (roommate) => {
 //     return {
