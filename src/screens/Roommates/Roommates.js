@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet, FlatList } from 'react-native'; 
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native'; 
 import { connect } from 'react-redux';
 import Backdrop from '../../hoc/Backdrop/Backdrop'; 
 import Touchable from '../../hoc/Touchable/Touchable'; 
@@ -52,23 +52,32 @@ class RoommatesScreen extends Component {
     }
     
     render() {
-        const { roommates } = this.props;
+        const { roommates, notifications } = this.props;
+
+        let roommatesEls = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" colors={colors.PRIMARY_COLOR} />
+            </View>
+        ); 
+        
+        if(roommates) {
+            <ScrollView> {/*use ScrollView because of conditional notification render*/}
+                {roommatesEls = roommates.map((mate, index) => (
+                    <Touchable key={mate.id} onPress={() => this.handleRoommateClicked(mate.id)}>
+                        <View style={[styles.listItem, index !== roommates.length-1 ? styles.listItemBorder : null]}>
+                            <Text style={styles.listItemText}>{`${mate.firstName} ${mate.lastName}`}</Text>
+                            {notifications[mate.id] && <View style={styles.notificationContainer}><Text style={styles.notificationText}>{notifications[mate.id]}</Text></View>}
+                        </View>
+                    </Touchable>
+                ))} 
+            </ScrollView>
+        }
 
         return (
             <Backdrop>
                 <View style={styles.container}>
                     <Text style={styles.headingText}>Roommates</Text>
-                    <FlatList 
-                        keyExtractor={item => item.id}
-                        data={roommates}
-                        renderItem={info => (
-                            <Touchable onPress={() => this.handleRoommateClicked(info.item.id)}>
-                                <View style={[styles.listItem, info.index !== roommates.length-1 ? styles.listItemBorder : null]}>
-                                    <Text style={styles.listItemText}>{`${info.item.firstName} ${info.item.lastName}`}</Text>
-                                </View>
-                            </Touchable>
-                        )}
-                    />
+                    {roommatesEls}
                 </View>
             </Backdrop>
         );
@@ -78,6 +87,7 @@ class RoommatesScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 15, 
+        flex: 1,
         marginBottom: 15
     }, 
     headingText: {
@@ -88,6 +98,7 @@ const styles = StyleSheet.create({
     listItem: {
         flexDirection: 'row', 
         justifyContent: 'space-between', 
+        alignItems: 'center',
         marginBottom: 5,
         paddingTop: 5, 
         paddingBottom: 5
@@ -100,15 +111,25 @@ const styles = StyleSheet.create({
         fontSize: 16, 
         marginBottom: 2
     }, 
-    buttonContainer: {
-
+    notificationContainer: {
+        width: 20, 
+        height: 20, 
+        borderRadius: 10, 
+        backgroundColor: colors.PRIMARY_COLOR, 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    }, 
+    notificationText: {
+        color: colors.LIGHT_COLOR, 
+        fontSize: 10
     }
 }); 
 
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        roommates: state.roommates.mates
+        roommates: state.roommates.mates, 
+        notifications: state.roommates.notifications
     }
 }
 

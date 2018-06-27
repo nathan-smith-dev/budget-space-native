@@ -7,11 +7,16 @@ import Touchable from '../../../hoc/Touchable/Touchable';
 import { formatDate } from '../../../utilities';
 
 
-const transTableRow = ({ date, amount, type, categoryName, onPress, direction, border }) => {
+const transTableRow = ({ date, amount, type, categoryName, onPress, direction, border, highlight }) => {
+
+    const tableRowStyles = {
+        backgroundColor: highlight ? colors.SECONDARY_COLOR : 'transparent',
+        borderBottomWidth: !border ? 0 : 1
+    };
     return (
         <Touchable onPress={onPress}>
             <View>
-                <TableRow style={!border ? {borderBottomWidth: 0} : null}>
+                <TableRow style={tableRowStyles}>
                     <TableColumn grow={2}>
                         <Text>{formatDate(date)}</Text>
                     </TableColumn>
@@ -52,7 +57,8 @@ transTableRow.propTypes = {
     type: PropTypes.string.isRequired, 
     categoryName: PropTypes.string.isRequired,
     direction: PropTypes.string, 
-    border: PropTypes.bool.isRequired
+    border: PropTypes.bool.isRequired,
+    highlight: PropTypes.bool
 }
 
 export default transTableRow; 

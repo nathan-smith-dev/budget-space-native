@@ -6,6 +6,7 @@ const initialState = {
     focusedRoommate: null,
     notifications: {}, 
     mateTransactions: [], 
+    loading: true
 }; 
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 mates: action.mates,
+                loading: false
             }; 
         case actionTypes.SET_FOCUSED_ROOMMATE: 
             return {

@@ -41,8 +41,8 @@ class RoommateDetailScreen extends Component {
         }
     }
 
-    handleOnExpenseSelected = id => {
-        const { mateTransactions, roommateId, navigator } = this.props; 
+    handleOnExpenseSelected = async id => {
+        const { mateTransactions, roommateId, navigator, token, getRoommates } = this.props; 
         const transaction = mateTransactions[roommateId].filter(trans => trans.id === id)[0]; 
         navigator.push({
             screen: 'budget-space-native.TransactionDetail', 
@@ -56,6 +56,22 @@ class RoommateDetailScreen extends Component {
             animated: true, 
             animationType: 'fade'
         }); 
+        if(transaction.direction === 'From') {
+            let tries = 0; 
+                while (tries < 5) {
+                    try {
+                        const postedDate = await apiCalls.updateRoommateExpense(token, {...transaction, acknowledged: true, resolved: false}); 
+                        // console.log(postedDate.data); 
+                        getRoommates(token); 
+                        return; 
+                    }
+                    catch(err) {
+                        console.log(err); 
+                        tries++; 
+                    }
+            }
+            alert('Error acknowledging roommate expense.'); 
+        }
     }
 
     handleDeleteTransaction = async id => {

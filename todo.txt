@@ -1,5 +1,4 @@
 - Roommate features
-    - Roommate notifications
     - Add roommate
     - Remove roommate
     

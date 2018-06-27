@@ -145,14 +145,20 @@ class TransactionsScreen extends Component {
         }
         return (
             <Backdrop>
-                {content}
+                <View style={styles.container}> 
+                    {content}
+                </View>
             </Backdrop>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    
+    container: {
+        flex: 1,
+        padding: 15,
+        marginBottom: 50
+    }
 }); 
 
 const mapStateToProps = state => {

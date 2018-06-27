@@ -28,6 +28,7 @@ const transTable = ({ transactions, onRowPressed, onFilterPressed, refreshing, o
                     renderItem={info => (
                         <TransactionTableRow 
                             border={info.index !== transactions.length-1}
+                            highlight={typeof info.item.acknowledged !== 'undefined' && !info.item.acknowledged}
                             date={info.item.date}
                             amount={info.item.amount}
                             type={info.item.type}
