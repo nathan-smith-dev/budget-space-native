@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Backdrop from '../../hoc/Backdrop/Backdrop'; 
 import Touchable from '../../hoc/Touchable/Touchable'; 
 import * as colors from '../../assets/styles/colors';
+import Icon from 'react-native-vector-icons/Ionicons'; 
 
 class RoommatesScreen extends Component {
     constructor(props) {
@@ -28,13 +29,26 @@ class RoommatesScreen extends Component {
 
     handleRoommateClicked = uid => {
         const { navigator } = this.props; 
-        navigator.push({
-            screen: 'budget-space-native.RoommateDetailScreen', 
-            title: 'Roommate Expenses', 
-            passProps: { roommateId: uid }, 
-            animated: true, 
-            animationType: 'fade'
-        }); 
+        Icon.getImageSource('md-add', 40)
+            .then(source => {
+                navigator.push({
+                    screen: 'budget-space-native.RoommateDetailScreen', 
+                    title: 'Roommate Expenses', 
+                    passProps: { roommateId: uid }, 
+                    animated: true, 
+                    animationType: 'fade', 
+                    navigatorButtons: {
+                        rightButtons: [
+                            {
+                                icon: source, 
+                                title: 'add roommate expense', 
+                                id: 'addRoommateExpenseToggle', 
+                                buttonFontWeight: '800'
+                            }
+                        ]
+                    }
+                }); 
+            })
     }
     
     render() {

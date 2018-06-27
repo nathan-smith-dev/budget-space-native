@@ -12,6 +12,7 @@ import ButtonOutline from '../../components/ButtonOutline/ButtonOutline';
 import moment from 'moment'; 
 import * as apiCalls from '../../apiCalls'; 
 import * as transactionActions from '../../store/actions/transactions'; 
+import * as roommateActions from '../../store/actions/roommates'; 
 
 class TransactionFormScreen extends Component {
     state = {
@@ -164,7 +165,7 @@ class TransactionFormScreen extends Component {
 
     sendNewTransaction = async () => {
         const { amount, date, description, categoryId } = this.state;
-        const { token, getTransactions, navigator } = this.props;
+        const { token, getTransactions, navigator, roommateId, isRoommateExpense, getRoommates } = this.props;
         const transObj = {
             amount: parseFloat(amount.value), // send as a number 
             date: date.value.toDate(),
@@ -172,18 +173,44 @@ class TransactionFormScreen extends Component {
             categoryId: categoryId.value
         }; 
         // console.log(transObj); 
-        let tries = 0; 
-        while (tries < 5) {
-            try {
-                const postedDate = await apiCalls.createTransaction(token, transObj); 
-                console.log(postedDate.data); 
-                getTransactions(token); 
-                navigator.pop({ animationType: 'fade' }); 
-                return; 
+
+        if(isRoommateExpense) {
+            const roommateTransObj = {
+                ...transObj, 
+                resolved: false, 
+                roommateId: roommateId, 
+                acknowledged: false
+            }; 
+
+            let tries = 0; 
+            while (tries < 5) {
+                try {
+                    const postedDate = await apiCalls.createRoommateExpense(token, roommateTransObj); 
+                    console.log(postedDate.data); 
+                    getRoommates(token); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    return; 
+                }
+                catch(err) {
+                    console.log(err); 
+                    tries++; 
+                }
             }
-            catch(err) {
-                console.log(err); 
-                tries++; 
+        }
+        else {
+            let tries = 0; 
+            while (tries < 5) {
+                try {
+                    const postedDate = await apiCalls.createTransaction(token, transObj); 
+                    console.log(postedDate.data); 
+                    getTransactions(token); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    return; 
+                }
+                catch(err) {
+                    console.log(err); 
+                    tries++; 
+                }
             }
         }
         alert('Failed sending new transaction.'); 
@@ -191,7 +218,7 @@ class TransactionFormScreen extends Component {
 
     updateTransaction = async () => {
         const { amount, date, description, categoryId } = this.state;
-        const { token, getTransactions, navigator } = this.props;
+        const { token, getTransactions, navigator, roommateId, isRoommateExpense, getRoommates } = this.props;
         const { type, id } = this.props.transaction; 
 
         const transObj = {
@@ -203,21 +230,48 @@ class TransactionFormScreen extends Component {
             type: type
         }; 
 
-        let tries = 0; 
-        while (tries < 5) {
-            try {
-                const postedDate = await apiCalls.updateTransaction(token, transObj); 
-                navigator.pop({ animationType: 'fade' }); 
-                navigator.pop({ animationType: 'fade' }); 
-                getTransactions(token); 
-                return; 
+        if(isRoommateExpense) {
+            const roommateTransObj = {
+                ...transObj, 
+                resolved: false, 
+                roommateId: roommateId, 
+                acknowledged: false
+            }; 
+
+            let tries = 0; 
+            while (tries < 5) {
+                try {
+                    const postedDate = await apiCalls.updateRoommateExpense(token, roommateTransObj); 
+                    console.log(postedDate.data); 
+                    getRoommates(token); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    return; 
+                }
+                catch(err) {
+                    console.log(err); 
+                    tries++; 
+                }
             }
-            catch(err) {
-                console.log(err); 
-                tries++; 
-            }
+            alert('Failed updating roommate transaction.'); 
         }
-        alert('Failed updating transaction.'); 
+        else {
+            let tries = 0; 
+            while (tries < 5) {
+                try {
+                    const postedDate = await apiCalls.updateTransaction(token, transObj); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    navigator.pop({ animationType: 'fade' }); 
+                    getTransactions(token); 
+                    return; 
+                }
+                catch(err) {
+                    console.log(err); 
+                    tries++; 
+                }
+            }
+            alert('Failed updating transaction.'); 
+        }
     }
 
     render() {
@@ -347,7 +401,8 @@ mapStateToProps = state => {
 
 mapDispatchToProps = dispatch => {
     return {
-        getTransactions: token => dispatch(transactionActions.getTransactions(token))
+        getTransactions: token => dispatch(transactionActions.getTransactions(token)), 
+        getRoommates: token => dispatch(roommateActions.getRoommates(token))
     };
 }; 
 
