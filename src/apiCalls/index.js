@@ -131,7 +131,11 @@ export const getRoommateNotifications = token => {
 
 export const getAllUsers = token => {
     return instance.get(`/users`, { headers: { 'x-auth-token': token } }); 
-}
+}; 
+
+export const createRoommateRequests = (token, recipientId) => {
+    return instance.post(`/roommates/requests`, { recipientId: recipientId }, { headers: { 'x-auth-token': token } }); 
+};
 
 const sqlEscapeSingleQuote = (escString) => { // TODO: this should be done on the server instead. good enough for now
     if(escString) return escString.replace("'", "''"); 
