@@ -23,7 +23,13 @@ class RoommatesScreen extends Component {
             }); 
         }
         else if(event.type === 'NavBarButtonPress' && event.id === 'addRoommateToggle') {
-            
+            navigator.push({
+                screen: 'budget-space-native.AddRoommateScreen', 
+                title: 'Add Roommate', 
+                passProps: {}, 
+                animated: true, 
+                animationType: 'fade'
+            }); 
         }
     }
 

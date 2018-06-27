@@ -3,7 +3,6 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     requests: null, 
     mates: null, 
-    focusedRoommate: null,
     notifications: {}, 
     mateTransactions: [], 
     loading: true

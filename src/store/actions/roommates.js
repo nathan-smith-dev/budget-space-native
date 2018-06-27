@@ -97,15 +97,3 @@ export const setRoommateNotifications = (notifications) => {
     }; 
 }
 
-// export const setFocusedRoomateSuccess = (roommate) => {
-//     return {
-//         type: actionTypes.SET_FOCUSED_ROOMMATE, 
-//         roommate: roommate
-//     }; 
-// }; 
-
-// export const setFocusedRoomate = (roommateUid) => {
-//     return dispatch => {
-//         apiCalls.getUser(roommateUid, user => dispatch(setFocusedRoomateSuccess(user[0]))); 
-//     }
-// }; 

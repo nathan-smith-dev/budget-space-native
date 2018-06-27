@@ -32,6 +32,7 @@ export const registerAuthListeners = () => {
             if(currentUser) {
                 const token = await currentUser.getIdToken(); 
                 store.dispatch(authActions.setAuthToken(token)); 
+                store.dispatch(authActions.getAllUsers(token)); 
                 if(token) {
                     addUserToDatabase(currentUser, token); 
                     store.dispatch(transactionActions.getTransactions(token)); 

@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     currentUser: null, 
-    token: null
+    token: null, 
+    users: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 token: action.token
+            }; 
+        case actionTypes.SET_ALL_USERS: 
+            return {
+                ...state, 
+                users: action.users
             }; 
         default: 
             return state; 
