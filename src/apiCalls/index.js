@@ -40,21 +40,21 @@ export const getUserCategories = (token) => {
 }; 
 
 export const createTransaction = (token, transObj) => {
-    const url = transObj.type === 'income' ? `/incomes` : `/expenses`; 
+    const url = transObj.type === 'income' || transObj.type === 'Income' ? `/incomes` : `/expenses`; 
     
     return instance.post(url, {...transObj, desc: sqlEscapeSingleQuote(transObj.desc)}, { headers: { 'x-auth-token': token } }); 
 }; 
 
 export const deleteTransaction = (token, id, type) => {
-    const url = type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
+    const url = type === 'Income' || type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
 
     return instance.delete(url, { headers: { 'x-auth-token': token } });
 }; 
 
 export const updateTransaction = (token, transObj) => {
     const { id, type } = transObj; 
-    const url = type === 'income' ? `/incomes/${id}` : `/expenses/${id}`; 
-    console.log({...transObj, desc: sqlEscapeSingleQuote(transObj.desc)});
+    const url = type === 'income' || type === 'Income' ? `/incomes/${id}` : `/expenses/${id}`; 
+    console.log(transObj); 
 
     return instance.put(url, transObj, { headers: { 'x-auth-token': token } })
 }; 

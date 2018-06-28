@@ -56,7 +56,7 @@ class TransactionFormScreen extends Component {
                     touched: false
                 }, 
                 type: {
-                    value: nextProps.transaction.type,
+                    value: nextProps.transaction.type.toLowerCase(),
                     valid: true
                 }, 
                 amount: {
@@ -164,13 +164,14 @@ class TransactionFormScreen extends Component {
     }
 
     sendNewTransaction = async () => {
-        const { amount, date, description, categoryId } = this.state;
+        const { amount, date, description, categoryId, type } = this.state;
         const { token, getTransactions, navigator, roommateId, isRoommateExpense, getRoommates } = this.props;
         const transObj = {
             amount: parseFloat(amount.value), // send as a number 
             date: date.value.toDate(),
             desc: description.value, 
-            categoryId: categoryId.value
+            categoryId: categoryId.value,
+            type: type.value
         }; 
         // console.log(transObj); 
 
@@ -217,9 +218,10 @@ class TransactionFormScreen extends Component {
     }
 
     updateTransaction = async () => {
-        const { amount, date, description, categoryId } = this.state;
+        const { amount, date, description, categoryId, type } = this.state;
         const { token, getTransactions, navigator, roommateId, isRoommateExpense, getRoommates } = this.props;
-        const { type, id } = this.props.transaction; 
+        const { id } = this.props.transaction; 
+        console.log(type); 
 
         const transObj = {
             id: id,
@@ -227,7 +229,7 @@ class TransactionFormScreen extends Component {
             date: date.value.toDate(),
             desc: description.value, 
             categoryId: categoryId.value, 
-            type: type
+            type: type.value
         }; 
 
         if(isRoommateExpense) {
