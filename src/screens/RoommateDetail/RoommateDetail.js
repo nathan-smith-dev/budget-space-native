@@ -81,7 +81,7 @@ class RoommateDetailScreen extends Component {
         let tries = 0; 
             while (tries < 5) {
                 try {
-                    const postedDate = await apiCalls.updateRoommateExpense(token, {...transObj, resolved: true}); 
+                    const postedDate = await apiCalls.updateRoommateExpense(token, {...transObj, resolved: true, acknowledged: true}); 
                     console.log(postedDate.data); 
                     getRoommates(token); 
                     navigator.pop({ animationType: 'fade' }); 

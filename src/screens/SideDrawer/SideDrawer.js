@@ -17,13 +17,25 @@ class SideDrawer extends Component {
     }
 
     handleOnFilter = () => {
-        Navigation.showModal({
-            screen: 'budget-space-native.FilterScreen', 
-            title: 'Filter Settings', 
-            passProps: {}, 
-            animated: true, 
-            animationType: 'fade'
-        }); 
+        Icon.getImageSource('ios-arrow-back', 30)
+            .then(source => {
+                Navigation.showModal({
+                    screen: 'budget-space-native.FilterScreen', 
+                    title: 'Filter Settings', 
+                    passProps: {}, 
+                    animated: true, 
+                    animationType: 'fade', 
+                    navigatorButtons: {
+                        leftButtons: [
+                            {
+                                icon: source, 
+                                title: 'back', 
+                                id: 'goBack'
+                            }
+                        ]
+                    }
+                }); 
+            }); 
         const { navigator } = this.props; 
         navigator.toggleDrawer({
             side: 'left'

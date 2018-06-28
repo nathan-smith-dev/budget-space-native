@@ -8,8 +8,24 @@ import Backdrop from '../../hoc/Backdrop/Backdrop';
 import MonthYearSelector from '../../components/MonthYearSelector/MonthYearSelector'; 
 import FilterSelector from '../../components/FilterSelector/FilterSelector'; 
 import { formatDate, calcTimezoneOffset } from '../../utilities';
+import { Navigation } from 'react-native-navigation'; 
 
 class FilterScreen extends Component {
+    constructor(props) {
+        super(props); 
+
+        const { navigator } = props; 
+        // console.log(navigator); 
+        navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
+    }
+
+    onNavigatorEvent = event => {
+        if(event.type === 'NavBarButtonPress' && event.id === 'goBack') {
+            Navigation.dismissModal({
+                animationType: 'slide-down'
+            }); 
+        }
+    }
 
     handleMonthChange = (month, index) => {
         const { setTrackedDates, focusedDates, token, getTransactions } = this.props; 
