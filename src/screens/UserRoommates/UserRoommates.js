@@ -28,7 +28,18 @@ class UserRoommatesScreen extends Component {
     handleOnRoommateDelete = async id => {
         const { token, getRoommates } = this.props; 
 
-        console.log('Delete '+id); 
+        let tries = 0; 
+        while (tries < 5) {
+            try {
+                const result = await apiCalls.deleteRoommate(token, id); 
+                getRoommates(token); 
+                return; 
+            }
+            catch(err) {
+                console.log(err); 
+                tries++; 
+            }
+        } 
     }
 
     render() {

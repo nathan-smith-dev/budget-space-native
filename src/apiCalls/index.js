@@ -104,7 +104,11 @@ export const getRoommateRequests = token => {
 }; 
 
 export const getRoommates = token => {
-    return instance.get(`/roommates`, { headers: { 'x-auth-token': token } })
+    return instance.get(`/roommates`, { headers: { 'x-auth-token': token } }); 
+}; 
+
+export const deleteRoommate = (token, id) => {
+    return instance.delete(`/roommates/${id}`, { headers: { 'x-auth-token': token } }); 
 }; 
 
 export const getRoommateIncomesAndExpenses = (token, roommatesArr) => {
