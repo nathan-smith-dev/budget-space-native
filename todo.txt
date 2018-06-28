@@ -1,5 +1,4 @@
 - Roommate features
-    - Add roommate
     - Remove roommate
-    
+
 - Add splash screen

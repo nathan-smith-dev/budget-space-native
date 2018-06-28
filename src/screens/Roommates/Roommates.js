@@ -56,9 +56,21 @@ class RoommatesScreen extends Component {
                 }); 
             })
     }
+
+    handleOnRoommateRequestPressed = () => {
+        const { navigator } = this.props; 
+
+        navigator.push({
+            screen: 'budget-space-native.RoommateRequestsScreen', 
+            title: 'Roommate Requests', 
+            passProps: {}, 
+            animated: true, 
+            animationType: 'fade'
+        }); 
+    }
     
     render() {
-        const { roommates, notifications } = this.props;
+        const { roommates, notifications, requests } = this.props;
 
         let roommatesEls = (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -82,6 +94,15 @@ class RoommatesScreen extends Component {
         return (
             <Backdrop>
                 <View style={styles.container}>
+                    <Text style={styles.headingText}>Roommate Requests</Text>
+                    <Touchable onPress={this.handleOnRoommateRequestPressed}>
+                        <View style={styles.subContainer}>
+                            <View style={styles.listItem}>
+                                <Text style={styles.listItemText}>{requests && requests.length ? "Roomate Request" : "No Roommate Requests"}</Text>
+                                {requests && requests.length && <View style={styles.notificationContainer}><Text style={styles.notificationText}>{requests.length}</Text></View>}
+                            </View>
+                        </View>
+                    </Touchable>
                     <Text style={styles.headingText}>Roommates</Text>
                     {roommatesEls}
                 </View>
@@ -96,10 +117,13 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 15
     }, 
+    subContainer: {
+        marginBottom: 15
+    },
     headingText: {
         fontSize: 14, 
         color: colors.DARK_COLOR, 
-        marginBottom: 10, 
+        marginBottom: 2, 
     }, 
     listItem: {
         flexDirection: 'row', 
@@ -135,7 +159,8 @@ const mapStateToProps = state => {
     return {
         token: state.auth.token,
         roommates: state.roommates.mates, 
-        notifications: state.roommates.notifications
+        notifications: state.roommates.notifications, 
+        requests: state.roommates.requests
     }
 }
 

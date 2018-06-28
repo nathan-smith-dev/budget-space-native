@@ -50,7 +50,7 @@ class AddRoommateScreen extends Component {
         Alert.alert('Send Roommate Request', 'To: ' + roommate.name, [
             {text: 'Send', onPress: () => this.handleSendRoomateRequest(roommate.uid)},
             {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        ])
+        ]); 
     }
 
     handleSendRoomateRequest = async uid => {
