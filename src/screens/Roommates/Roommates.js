@@ -99,7 +99,7 @@ class RoommatesScreen extends Component {
                         <View style={styles.subContainer}>
                             <View style={styles.listItem}>
                                 <Text style={styles.listItemText}>{requests && requests.length ? "Roomate Request" : "No Roommate Requests"}</Text>
-                                {requests && requests.length && <View style={styles.notificationContainer}><Text style={styles.notificationText}>{requests.length}</Text></View>}
+                                {requests && requests.length ? <View style={styles.notificationContainer}><Text style={styles.notificationText}>{requests.length}</Text></View> : null}
                             </View>
                         </View>
                     </Touchable>
