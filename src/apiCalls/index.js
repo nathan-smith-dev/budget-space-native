@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-    baseURL: 'https://nsmith.site/api/',
+    baseURL: 'https://budget-space.com/api/',
     timeout: 1000
 });
 
