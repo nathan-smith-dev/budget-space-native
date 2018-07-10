@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, AppState } from 'react-native';
 import Backdrop from '../../hoc/Backdrop/Backdrop' ; 
 import TransactionTable from '../../components/TransactionTable/TransactionTable'; 
 import { connect } from 'react-redux';
@@ -7,6 +7,7 @@ import * as apiCalls from '../../apiCalls';
 import * as transactionActions from '../../store/actions/transactions'; 
 import * as colors from '../../assets/styles/colors'; 
 export let rootNavigator = null; 
+import firebase from 'react-native-firebase'; 
 
 class TransactionsScreen extends Component {
     constructor(props) {
@@ -16,6 +17,24 @@ class TransactionsScreen extends Component {
         rootNavigator = navigator; 
         // console.log(navigator); 
         navigator.setOnNavigatorEvent(this.onNavigatorEvent); 
+    }
+
+    componentDidMount() {
+        AppState.addEventListener('change', this._handleAppStateChange);
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    _handleAppStateChange = async (nextAppState) => { // this forces the refresh of auth token when the user becomes active 
+        if (nextAppState === 'active') {
+            const currentUser = firebase.auth().currentUser; 
+            if(currentUser) {
+                const idToken = await currentUser.getIdToken(); 
+                // if(idToken) console.log('Got new token'); 
+            }
+        }
     }
 
     onNavigatorEvent = event => {
