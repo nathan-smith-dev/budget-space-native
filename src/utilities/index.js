@@ -7,3 +7,7 @@ export const calcTimezoneOffset = (date) => {
     const userTimezoneOffset = date.getTimezoneOffset() * 60000;
     return new Date(date.getTime() + userTimezoneOffset); 
 }
+
+export const getRandomTimeout = (min, max) => {
+    return Math.floor((Math.random() * (max - min) + min) * 1000); 
+}; 
