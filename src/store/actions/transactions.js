@@ -156,6 +156,9 @@ export const setTransactions = transactions => {
 }; 
 
 export const setTotalIncomesAndExpense = totals => {
+    if(!totals.incomes) totals.incomes = 0; 
+    if(!totals.expenses) totals.expenses = 0; 
+
     return {
         type: actionTypes.SET_TOTALS, 
         totals: totals
