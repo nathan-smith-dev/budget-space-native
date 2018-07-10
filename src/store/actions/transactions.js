@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import * as apiCalls from '../../apiCalls'; 
+import * as authActions from '../actions/auth'; 
 import { calcTimezoneOffset } from '../../utilities';
 import * as annualTransactionActions from './annualTransactions'; 
 
@@ -29,8 +30,16 @@ export const getTransactions = token => {
             }
             catch(err) {
                 // alert('Error getting transactions'); 
-                tries++; 
-                console.log(err); 
+                try {
+                    const newToken = await getState().auth.currentUser.getIdToken(); 
+                    dispatch(authActions.setAuthToken(newToken)); 
+                    tries++; 
+                    console.log('Get new token', err); 
+                }
+                catch(err) {
+                    tries++; 
+                    console.log(err); 
+                }
             }
         }
         alert('Error getting transactions');
