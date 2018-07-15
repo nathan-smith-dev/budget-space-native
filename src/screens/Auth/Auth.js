@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, Button, Image, StyleSheet } from 'react-native'; 
+import { View, Text, Button, Image, StyleSheet, StatusBar } from 'react-native'; 
 import { connect } from 'react-redux';
 import * as firebase from '../../firebase/firebase'; 
 import bsLogo from '../../assets/images/budget-space-text.png'; 
@@ -25,6 +25,9 @@ class AuthScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar 
+                    barStyle="light-content"
+                />
                 <View style={styles.secondaryContainer}>
                     <Image style= {{flex:1 , width: undefined, height: undefined}} source={bsLogo} />
                 </View>

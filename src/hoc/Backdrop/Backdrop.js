@@ -1,10 +1,11 @@
 import React from 'react'; 
 import * as colors from '../../assets/styles/colors'; 
-import { View, StyleSheet } from 'react-native'; 
+import { View, StyleSheet, StatusBar } from 'react-native'; 
 
 const backdrop = (props) => {
     return (
         <View style={styles.backDrop}>
+            <StatusBar barStyle="light-content" />
             <View style={styles.container}>
                 {props.children}
             </View>
