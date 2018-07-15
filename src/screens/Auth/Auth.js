@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet } from 'react-native'; 
 import { connect } from 'react-redux';
 import * as firebase from '../../firebase/firebase'; 
-import bsLogo from '../../assets/images/budget-space_logo.png'; 
+import bsLogo from '../../assets/images/budget-space-text.png'; 
 import ButtonOutline from '../../components/ButtonOutline/ButtonOutline'; 
 
 class AuthScreen extends Component {
@@ -26,8 +26,7 @@ class AuthScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.secondaryContainer}>
-                    <Image source={bsLogo} height={50} />
-                    <Text style={styles.title}>Budget Space</Text>
+                    <Image style= {{flex:1 , width: undefined, height: undefined}} source={bsLogo} />
                 </View>
                 <View>
                     <ButtonOutline 
@@ -51,7 +50,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     }, 
     secondaryContainer: {
-        alignItems: 'center'
+        width: 170, 
+        height: 150, 
     }, 
     title: {
         color: 'white', 
